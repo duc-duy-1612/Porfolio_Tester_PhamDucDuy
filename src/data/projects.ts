@@ -271,7 +271,6 @@ export const projects: Project[] = [
     tags: [
       "TO-BE Process",
       "Requirements Engineering",
-      "Traceability Matrix",
       "Business Rules",
       "Order Lifecycle",
       "Data Modelling"
@@ -281,28 +280,25 @@ export const projects: Project[] = [
     overview:
       "This case study reconstructs and verifies the requirements of a multi-role Online Food Delivery System against the approved project baseline and available implementation evidence, covering Customer, Restaurant, Shipper and Administrator workflows. The analysis separates intended TARGET behaviour from CURRENT implementation evidence and connects process models, business rules, lifecycle states, requirements, data, gap findings and UAT through controlled traceability.\n\nThe analysed scope includes account registration and authentication, restaurant and menu browsing, checkout and fee calculation, Restaurant order processing, Shipper assignment and delivery, order tracking, reviews and Administrator capabilities. Native mobile applications and real production payment-gateway integration are outside scope. Unresolved target semantics are retained as explicit clarifications rather than presented as confirmed behaviour.",
     scope: "",
-    cardArtefacts: ["TO-BE Process", "Order Lifecycle", "Traceability Matrix"],
+    cardArtefacts: ["TO-BE Process", "Order Lifecycle", "Logical ERD"],
     responsibilities: [
       "Structured and specified 27 Functional Requirements across system-level SRS and detailed FRS views, supported by 17 actor-goal Use Cases, 22 User Stories and 50 Acceptance Criteria.",
       "Modelled a controlled four-state TARGET order lifecycle and its permitted transitions.",
       "Extracted and defined 7 controlled business rules decoupled from implementation.",
       "Separated logical business concepts from physical persistence in the Data Dictionary.",
       "Performed TARGET vs CURRENT gap analysis to identify implementation discrepancies.",
-      "Designed a 60-entry UAT/validation catalogue comprising 59 UAT designs and 1 separately classified technical validation, with backward traceability through the RTM while retaining unresolved TARGET semantics as explicit blocked conditions.",
+      "Designed a 60-entry UAT/validation catalogue comprising 59 UAT designs and 1 separately classified technical validation, mapping backward traceability while retaining unresolved TARGET semantics as explicit blocked conditions.",
     ],
     baPipeline: [
       "Business Context",
-      "User Requirements (URD)",
       "AS-IS Analysis",
       "TO-BE Process",
       "Business Rules",
-      "Agile Product Backlog",
       "System & Functional Requirements — SRS / FRS",
       "UC / User Stories / Acceptance Criteria",
       "State & Data Modelling",
       "TARGET vs CURRENT Validation",
       "Gap Analysis",
-      "Traceability — RTM",
       "UAT / Validation Design"
     ],
     asisNote: "The AS-IS model is an analytical case-study baseline used for comparison with the TO-BE process; it was not validated through formal stakeholder interviews.",
@@ -387,7 +383,6 @@ export const projects: Project[] = [
         "UC-CUS-03\\nCheckout and Place Order",
         "US-CUS-04\\nComplete Checkout",
         "AC-US-CUS-04-02 / 03\\n≤ 30 km allowed / > 30 km rejected",
-        "RTM-010 + RTM-032",
         "UAT-009 + UAT-010\\nBoundary Validation"
       ],
       uatStats: {
@@ -399,19 +394,17 @@ export const projects: Project[] = [
     },
     baCompetencies: [
       { competency: "Business Process Analysis", evidence: "AS-IS & TO-BE models isolating fragmentation and multi-role handoffs" },
-      { competency: "Agile Backlog Management", evidence: "User Stories mapped into a prioritized Agile Product Backlog" },
+      { competency: "User Story Development", evidence: "Functional requirements decomposed into User Stories and Acceptance Criteria" },
       { competency: "Business Rule Modelling", evidence: "7 controlled rules decoupled from functional narratives" },
       { competency: "State/Lifecycle Modelling", evidence: "Order state diagram with 4 strict statuses and transition triggers" },
       { competency: "Data Analysis", evidence: "Logical business concepts separated from CURRENT physical persistence." },
       { competency: "TARGET vs CURRENT Validation", evidence: "Gap Analysis distinguishing intended design from existing code" },
-      { competency: "Requirement Traceability", evidence: "RTM linking rules, criteria, gaps, and UAT coverage" },
       { competency: "UAT / Validation Design", evidence: "Acceptance Criteria translated into positive, negative, boundary, state-transition and clarification-blocked UAT designs, with the non-UAT technical-validation entry kept separately classified." }
     ],
     summaryMetrics: [
-      { value: "14", label: "Full SDLC Artefacts", subtext: "From Business Context to End-to-End Validation" },
+      { value: "10", label: "Core SDLC Artefacts", subtext: "From Business Context to End-to-End Validation" },
       { value: "27", label: "Functional Requirements" },
       { value: "7", label: "Business Rules" },
-      { value: "38", label: "RTM Traceability Rows" },
       { value: "60", label: "Validation Catalogue Entries", subtext: "59 UAT Designs · 1 Non-UAT Technical Validation | 53 Ready · 6 Blocked by TARGET Clarification" }
     ],
     analysisOutputs:
@@ -420,21 +413,21 @@ export const projects: Project[] = [
       "Separating logical TARGET data concepts from CURRENT physical persistence is essential for accurate requirements.",
       "Identifying implementation gaps (like GAP-01) should not result in rewriting the target to match the code.",
       "Handling unresolved semantics without inventing a definition demonstrates maturity in managing ambiguity.",
-      "Building backward traceability from UAT to RTM makes test-design coverage explicit without overstating execution readiness."
+      "Building backward traceability from UAT to Acceptance Criteria makes test-design coverage explicit without overstating execution readiness."
     ],
     selectedEvidence: [
       { label: "Business Requirements Document (BRD)", action: "View BRD", href: "/evidence/online-delivery/07_Business_Requirements_Document.pdf", fileType: "pdf", external: true },
-      { label: "User Requirements Document (URD)", action: "View URD", href: "/evidence/online-delivery/User_Requirements_Document.pdf", fileType: "pdf", external: true },
-      { label: "Product Backlog", action: "View Backlog", href: "/evidence/online-delivery/Product_Backlog_Online_Food_Delivery.pdf", fileType: "pdf", external: true },
+      // { label: "User Requirements Document (URD)", action: "View URD", href: "/evidence/online-delivery/User_Requirements_Document.pdf", fileType: "pdf", external: true },
+      // { label: "Product Backlog", action: "View Backlog", href: "/evidence/online-delivery/Product_Backlog_Online_Food_Delivery.pdf", fileType: "pdf", external: true },
       { label: "AS-IS Process Analysis", action: "View Current-State Process", href: "/evidence/online-delivery/AS_IS_Process.pdf", fileType: "pdf", external: true },
       { label: "TO-BE Cross-Role Process", action: "View Process", href: "/evidence/online-delivery/01_TO_BE_Cross_Role_Process.pdf", fileType: "pdf", external: true },
-      { label: "Business Rules Catalogue", action: "View Rules", href: "/evidence/online-delivery/03_Business_Rules_Catalogue.pdf", fileType: "pdf", external: true },
+      // { label: "Business Rules Catalogue", action: "View Rules", href: "/evidence/online-delivery/03_Business_Rules_Catalogue.pdf", fileType: "pdf", external: true },
       { label: "Order State Diagram", action: "View Lifecycle", href: "/evidence/online-delivery/02_Order_State_Diagram.pdf", fileType: "pdf", external: true },
       { label: "Logical ERD / Data Model", action: "View Data Model", href: "/evidence/online-delivery/Logical_ERD.pdf", fileType: "pdf", external: true },
       { label: "Software Requirements Specification (SRS)", action: "View System Specification", href: "/evidence/online-delivery/Software_Requirements_Specification.pdf", fileType: "pdf", external: true },
       { label: "Functional Requirements Specification (FRS)", action: "View Functional Specification", href: "/evidence/online-delivery/Functional_Requirements_Specification.pdf", fileType: "pdf", external: true },
       { label: "User Stories & Acceptance Criteria", action: "View Requirement Detail", href: "/evidence/online-delivery/04_User_Stories_Acceptance_Criteria.pdf", fileType: "pdf", external: true },
-      { label: "Requirements Traceability Matrix", action: "Download RTM Workbook", href: "/evidence/online-delivery/05_Requirements_Traceability_Matrix.xlsx", fileType: "xlsx", download: true },
+      // { label: "Requirements Traceability Matrix", action: "Download RTM Workbook", href: "/evidence/online-delivery/05_Requirements_Traceability_Matrix.xlsx", fileType: "xlsx", download: true },
       { label: "UAT & Validation Design Catalogue", action: "Download Validation Workbook", href: "/evidence/online-delivery/06_UAT_Test_Cases.xlsx", fileType: "xlsx", download: true },
       { label: "Original Academic Project Report — Supporting Evidence", action: "View Supporting Report", href: "/evidence/online-delivery/08_Original_Academic_Project_Report.pdf", fileType: "pdf", external: true }
     ],
@@ -743,6 +736,13 @@ export const projects: Project[] = [
         action: "Download Selenium Project",
         href: "/evidence/tnc-testing/TNC_Selenium_IDE_Automation_Project.side",
         download: true
+      },
+      {
+        label: "Báo Cáo Kịch Bản Kiểm Thử (HTML)",
+        fileType: "html",
+        action: "View HTML Report",
+        href: "/evidence/tnc-testing/Bao_Cao_Test_Nhom_9.html",
+        external: true
       }
     ],
     artefacts: [],

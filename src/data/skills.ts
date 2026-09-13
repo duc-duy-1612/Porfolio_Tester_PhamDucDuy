@@ -20,10 +20,8 @@ export const skillGroups: SkillGroup[] = [
       "UML",
       "Use Case",
       "Activity Diagram",
-      "Sequence Diagram",
       "State Diagram",
       "ERD",
-      "Integration Flow",
     ],
   },
   {
@@ -31,9 +29,6 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       "Functional Testing",
       "Test Case Design",
-      "Boundary Testing",
-      "Business Rule Validation",
-      "Data Validation",
       "UAT",
     ],
   },
@@ -42,9 +37,6 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       "SQL",
       "Database Fundamentals",
-      "REST API",
-      "JSON",
-      "Data Flow Analysis",
       "SDLC",
       "Agile/Scrum",
     ],

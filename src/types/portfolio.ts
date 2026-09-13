@@ -166,7 +166,7 @@ export interface Project {
     description?: string;
     action: string;
     href?: string;
-    fileType?: "pdf" | "xlsx" | "side" | "image" | "png" | "jpg";
+    fileType?: "pdf" | "xlsx" | "side" | "image" | "png" | "jpg" | "html";
     download?: boolean;
     external?: boolean;
   }[];

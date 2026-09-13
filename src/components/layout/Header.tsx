@@ -50,7 +50,6 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
     <header className="site-header">
       <div className="site-header__inner">
         <Link className="brand" to="/#hero" aria-label="Go to homepage">
-          <span className="brand__mark">{profile.initials}</span>
           <span>
             <strong>{profile.fullName}</strong>
             <small>{profile.role}</small>

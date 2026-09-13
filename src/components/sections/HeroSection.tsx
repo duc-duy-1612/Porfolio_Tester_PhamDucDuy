@@ -65,7 +65,6 @@ export function HeroSection() {
 
         <FadeIn className="hero-visual" delay={0.1}>
           <div className="workspace-card workspace-card--profile">
-            <InitialsAvatar initials={profile.initials} name={profile.fullName} />
             <div>
               <strong>{profile.fullName}</strong>
               <span>{profile.positioning}</span>
