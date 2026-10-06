@@ -4,13 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 import { profile } from "../../data/profile";
 import { useActiveSection } from "../../hooks/useActiveSection";
 import { optionalUrl, withBasePath } from "../../utils/config";
-import { ThemeToggle } from "./ThemeToggle";
 import { MagneticButton } from "../ui/MagneticButton";
 
-interface HeaderProps {
-  theme: "light" | "dark";
-  onToggleTheme: () => void;
-}
+interface HeaderProps {}
 
 const sectionIds = ["hero", "about", "experience", "case-studies", "skills", "education", "contact"];
 
@@ -24,7 +20,7 @@ const navItems = [
   { label: "Contact", href: "/#contact", section: "contact" },
 ];
 
-export function Header({ theme, onToggleTheme }: HeaderProps) {
+export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const activeSection = useActiveSection(sectionIds);
@@ -76,7 +72,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
         </nav>
 
         <div className="site-header__actions">
-          <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+          {/* Theme toggle removed */}
           <button
             className="icon-button mobile-menu-button"
             type="button"
