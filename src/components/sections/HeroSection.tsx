@@ -5,6 +5,7 @@ import { profile } from "../../data/profile";
 import { optionalUrl, withBasePath } from "../../utils/config";
 import { FadeIn } from "../ui/FadeIn";
 import { InitialsAvatar } from "../ui/InitialsAvatar";
+import { MagneticButton } from "../ui/MagneticButton";
 
 const workspaceCards = [
   { title: "User Stories & Acceptance Criteria", desc: "Structured 340+ features and defined meticulous acceptance criteria for complex healthcare and e-commerce systems." },
@@ -31,29 +32,35 @@ export function HeroSection() {
           <p className="hero-supporting">{profile.heroSupportingHeadline}</p>
           <p className="hero-description">{profile.heroDescription}</p>
           <div className="hero-actions" aria-label="Primary actions">
-            <Link className="button button--primary" to="/#case-studies">
-              View Case Studies
-              <ArrowRight aria-hidden="true" size={18} />
-            </Link>
+            <MagneticButton>
+              <Link className="button button--primary inline-flex" to="/#case-studies">
+                View Case Studies
+                <ArrowRight aria-hidden="true" size={18} />
+              </Link>
+            </MagneticButton>
             {resumeHref && (
-              <a 
-                className="button button--secondary" 
-                href={resumeHref} 
-                download
-                onClick={() => {
-                  // TODO: Add real analytics tracking here (e.g. Google Analytics)
-                  console.log("Resume downloaded!");
-                }}
-              >
-                <Download aria-hidden="true" size={18} />
-                Download Resume
-              </a>
+              <MagneticButton>
+                <a 
+                  className="button button--secondary inline-flex" 
+                  href={resumeHref} 
+                  download
+                  onClick={() => {
+                    // TODO: Add real analytics tracking here (e.g. Google Analytics)
+                    console.log("Resume downloaded!");
+                  }}
+                >
+                  <Download aria-hidden="true" size={18} />
+                  Download Resume
+                </a>
+              </MagneticButton>
             )}
             {(optionalUrl(profile.contact.email) || optionalUrl(profile.contact.linkedin)) && (
-              <Link className="button button--ghost" to="/#contact">
-                <Mail aria-hidden="true" size={18} />
-                Contact Me
-              </Link>
+              <MagneticButton>
+                <Link className="button button--ghost inline-flex" to="/#contact">
+                  <Mail aria-hidden="true" size={18} />
+                  Contact Me
+                </Link>
+              </MagneticButton>
             )}
           </div>
           <ul className="credibility-list" aria-label="Quick credibility indicators">
@@ -71,7 +78,7 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="workspace-stack flex sm:grid overflow-x-auto sm:overflow-visible snap-x pb-4 sm:pb-0" aria-label="Business Analyst workspace preview">
+          <div className="workspace-stack flex sm:grid overflow-x-auto sm:overflow-visible snap-x pb-4 sm:pb-0" aria-label="QA & Tester workspace preview">
             {workspaceCards.map((card, index) => (
               <a
                 href="#case-studies"

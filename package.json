@@ -1,12 +1,12 @@
 {
-  "name": "pham-duc-duy-ba-portfolio",
+  "name": "Porfolio_Tester_PhamDucDuy",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build && node scripts/copy-404.mjs",
-    "build:github": "tsc -b && vite build --base=/ba-portfolio/ && node scripts/copy-404.mjs",
+    "build:github": "tsc -b && vite build --base=/Porfolio_Tester_PhamDucDuy/ && node scripts/copy-404.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {

@@ -127,7 +127,7 @@ function ProjectDetailContent({ project }: { project: NonNullable<ReturnType<typ
                   ))}
                 </div>
               )}
-              {project.overview.split('\n\n').map((paragraph, i) => (
+              {project.overview && project.overview.split('\n\n').map((paragraph, i) => (
                  <p key={i}><HighlightText text={paragraph} /></p>
               ))}
               {project.scope && <p><HighlightText text={project.scope} /></p>}
@@ -314,7 +314,7 @@ function ProjectDetailContent({ project }: { project: NonNullable<ReturnType<typ
             )}
 
             {project.baPipeline && (
-              <CaseStudyBlock title="My BA Approach">
+              <CaseStudyBlock title="Process / Pipeline">
                 <div className="step-flow" style={{ padding: '16px', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px' }}>
                   {project.baPipeline.map((step, index) => (
                     <Fragment key={step}>
@@ -497,7 +497,7 @@ function ProjectDetailContent({ project }: { project: NonNullable<ReturnType<typ
             )}
 
             {project.baCompetencies && (
-              <CaseStudyBlock title="BA Competencies Demonstrated">
+              <CaseStudyBlock title="Core Competencies Demonstrated">
                 <div className="three-column-grid">
                   {project.baCompetencies.map(comp => (
                     <div key={comp.competency} className="focus-card" style={{ padding: '24px', backgroundColor: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: '8px' }}>
@@ -533,7 +533,7 @@ function ProjectDetailContent({ project }: { project: NonNullable<ReturnType<typ
 
 
             {project.baRelevance && (
-              <CaseStudyBlock title="Why This Matters for Business Analysis">
+              <CaseStudyBlock title="QA Insights & Relevance">
                 <p>{project.baRelevance.description}</p>
                 <div className="card-grid" style={{ marginTop: '24px' }}>
                   {project.baRelevance.links.map(l => (

@@ -2,50 +2,36 @@ import type { Experience } from "../types/portfolio";
 
 export const experience: Experience = {
   company: "TMA Solutions",
-  position: "Business Analyst Intern",
-  period: "March 2026 - August 2026",
+  position: "BA & QA Intern",
+  period: "March 2026 – August 2026",
   domain: "Healthcare Products",
   summary:
-    "Supported healthcare product initiatives by clarifying requirements, modelling workflows, preparing functional artefacts and collaborating with cross-functional teams.",
+    "Supported manual functional testing, requirement analysis, and UAT preparation for healthcare product initiatives by validating implemented features against documented requirements.",
   capabilities: [
     {
-      title: "Requirement Analysis",
+      title: "QA Responsibilities",
       items: [
-        "Clarified stakeholder and product requirements.",
-        "Prepared user stories, acceptance criteria and business rules.",
-        "Identified exceptions, constraints and edge cases.",
+        "Supported manual functional testing and UAT, validating implemented features against documented requirements and expected system behaviour.",
+        "Designed and executed test scenarios based on business requirements and functional specifications.",
+        "Logged and tracked defects on Jira, documenting actual behaviour, expected behaviour, reproduction information, and relevant evidence when required.",
+        "Collaborated with Developers and Business Analysts to clarify issues, reproduce client-reported bugs, retest fixes, and verify results.",
+        "Compared actual implementation with requirements to identify functional discrepancies, requirement gaps, and edge cases.",
       ],
     },
     {
-      title: "Process and System Modelling",
+      title: "Requirement & Test Analysis",
       items: [
-        "Created user flows, business flows and system/integration flows.",
-        "Supported the definition of system behaviour and functional logic.",
-        "Prepared wireframes and interaction flows when needed.",
+        "Analysed and clarified requirements, User Stories, Acceptance Criteria, and Business Rules to establish testable expected behaviour.",
+        "Reviewed business and system flows to identify dependencies, exception paths, constraints, and potential test scenarios.",
+        "Supported requirement discussions across Product, BA, Development, UI/UX, and QA teams to improve functional clarity before and during testing.",
+        "Reviewed delivered features against documented requirements and supported UAT preparation and validation.",
       ],
     },
     {
-      title: "Cross-functional Collaboration",
+      title: "Selected QA Contribution",
       items: [
-        "Worked with Product Managers, Business Analysts, Developers, UI/UX Designers and QA.",
-        "Supported requirement alignment and backlog clarification.",
-        "Helped bridge business context and technical implementation.",
-      ],
-    },
-    {
-      title: "Validation and Delivery Support",
-      items: [
-        "Reviewed delivered functionality against requirements.",
-        "Supported functional testing and UAT.",
-        "Documented issues, expected behaviour and follow-up actions.",
-      ],
-    },
-    {
-      title: "Selected Internship Deliverables",
-      items: [
-        "Modelled a cross-system Homecare user flow covering authentication, service subscription, asynchronous processing, system hand-offs and exception handling.",
-        "Analysed and consolidated healthcare product requirements into structured, scoped and traceable feature catalogues.",
-        "Applied AI-assisted research techniques for information discovery and documentation support while maintaining responsibility for analysis, validation and final deliverables."
+        "Applied requirement-based testing to healthcare product features where business rules, workflow states, integrations, permissions, and exception handling affected expected system behaviour.",
+        "Used business and system analysis knowledge to improve test coverage and identify discrepancies beyond basic happy-path testing.",
       ]
     }
   ],

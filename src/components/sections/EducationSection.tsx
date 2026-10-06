@@ -15,10 +15,12 @@ export function EducationSection() {
             <h3>{education.degree}</h3>
             <p>{education.university}</p>
             <dl className="education-card__facts">
-              <div>
-                <dt>Expected graduation</dt>
-                <dd>{education.expectedGraduation}</dd>
-              </div>
+              {education.expectedGraduation && (
+                <div>
+                  <dt>Expected graduation</dt>
+                  <dd>{education.expectedGraduation}</dd>
+                </div>
+              )}
               <div>
                 <dt>GPA</dt>
                 <dd>{education.gpa}</dd>

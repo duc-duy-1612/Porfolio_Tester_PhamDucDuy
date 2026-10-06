@@ -3,102 +3,109 @@ import type { Project } from "../types/portfolio";
 export const projects: Project[] = [
   {
     slug: "wearable-health-data-integration",
-    category: "internship",
     title: "Healthcare Wearable Data Integration",
-    subtitle:
-      "Designing a reliable data flow from wearable ecosystems into a healthcare platform.",
+    subtitle: "Analysed multi-vendor health-data synchronization flows and translated complex permission dependencies and integration rules into testable conditions.",
     domain: "Healthcare / Data Integration",
-    role: "Business Analyst Intern",
+    role: "BA & QA Intern — Requirement Analysis & Test Design",
     period: "2026",
-    type: "Anonymised internship case study",
+    type: "Anonymised Internship Case Study",
+    category: "internship",
+    publicLabel: "Internship Deliverable",
+    isAnonymised: true,
+    confidentialityNotice: "Selected business and product details have been anonymised due to confidentiality.",
     tags: [
+      "Integration Testing",
+      "API Flow",
       "Requirement Analysis",
-      "Integration Flow",
-      "Business Rules",
-      "Health Data",
-      "Acceptance Criteria",
+      "State Validation",
       "Exception Handling",
+      "Health Data"
     ],
-    problem:
-      "The existing app hard-coded Samsung/Apple connection guides, alienating users of other brands and generating high volumes of support tickets.",
+    problem: "The application needed to ingest health data from 10 different wearable brands (including Garmin, Xiaomi, Samsung, Fitbit, Oura) via Health Connect. The legacy application utilized a hard-coded UI that only guided Samsung and Apple users, generating high volumes of support tickets.\n\nQA Challenge: Testing wearable integration is difficult because data availability, required OS permissions, cloud sync delays, and required companion apps vary wildly between vendors.",
     summaryMetrics: [
       { value: "10", label: "Wearable Ecosystems" },
       { value: "6", label: "Health Data Types" },
-      { value: "15-30m", label: "Sync Delay Evaluated" },
-      { value: "2", label: "UI/UX Proposals" }
+      { value: "15-30m", label: "Sync Delay Evaluated" }
     ],
-    overview:
-      "A healthcare application (mCare) needed to reliably ingest health data from 10 different wearable brands (including Garmin, Xiaomi, Samsung, Fitbit, Oura, and WHOOP) via Health Connect. The legacy application utilized a hard-coded UI that only guided Samsung and Apple users, causing severe confusion and high drop-off rates for users of other brands. This research mapped the exact data flows, supported clinical metrics, background sync constraints, and proposed a scalable, dynamic UI/UX flow to increase connection success rates.",
-    scope:
-      "This public case study has been anonymised. It represents a real-world integration research and UX/UI redesign project for synchronising 10 different wearable ecosystems into a central healthcare application via Android Health Connect.",
+    scope: "This public case study has been anonymised. It represents a real-world integration research and UX/UI redesign project for synchronising 10 different wearable ecosystems into a central healthcare application via Android Health Connect.",
     cardArtefacts: [
-      "Data Flow Architecture",
+      "Integration Rules",
       "Compatibility Matrix",
-      "Dynamic Selection UI"
+      "Testable Scenarios"
     ],
     businessProblem: [
-      "The existing app hard-coded Samsung/Apple connection guides, alienating users of other brands and generating high volumes of support tickets.",
       "Wearable brands use vastly different architectures (Cloud-mediated vs. Native) and require different background OS permissions to sync.",
       "Data availability varies heavily by vendor (e.g., WHOOP and Oura focus on Sleep/HRV, while Huawei requires a third-party bridge app like Health Sync).",
-      "Hard-coded UI created a scalability bottleneck, requiring a full app release for every new wearable brand added to the ecosystem.",
       "Users frequently dropped off because they didn't know how to grant background battery permissions or force cloud synchronization."
     ],
     responsibilities: [
       "Researched and mapped the end-to-end data synchronization flows for 10 major wearable ecosystems.",
       "Created a comprehensive Vendor Compatibility Matrix analyzing supported data types (Steps, HR, SpO2, Sleep, ECG, HRV).",
       "Identified system pain points, background permission dependencies, and cloud sync delays (averaging 15-30 minutes) for each vendor.",
-      "Proposed and evaluated two new UI/UX solutions (Generic Guide vs. Dynamic Selection Flow) to replace the legacy hard-coded screens.",
-      "Designed the target Dynamic Selection Flow, mapping out step-by-step connection checklists for each specific brand to guide low-tech users."
+      "Translated research findings into testable connection states, explicit permission requirements, and failure conditions."
     ],
-    solution: [
-      "Selected the \"Dynamic Selection Flow\" to provide brand-specific, step-by-step guidance overlays, drastically improving the UX for low-tech users without requiring full app updates for new brands.",
-      "Designed a unified connection state logic: Connection is only marked \"Successful\" when the app has Read permission, the vendor app has Write permission, and at least one valid data point is fetched.",
-      "Established clear error-handling guidance, prompting users to disable Android battery optimization or force cloud sync when data is missing."
+    testingObjective: {
+      description: "A Dynamic Selection Flow was selected to provide vendor-specific guidance and validation steps. This dynamic flow provides explicit vendor-specific conditions that can be converted into structured test scenarios. It reduces ambiguity when validating different integration paths.",
+      focusCards: [
+        { title: "Connection Rules", description: "Read/Write permissions + OS battery settings." },
+        { title: "Data Scenarios", description: "Different vendors support different metrics." },
+        { title: "Sync Timing", description: "Validating asynchronous background delays." }
+      ]
+    },
+    testingApproach: [
+      {
+        title: "Positive Path Integration Validation",
+        flow: ["Select Vendor", "Install App", "Grant Permissions", "Sync Data"],
+        description: "Validating the complete chain: Vendor \u2192 Cloud \u2192 Health Connect \u2192 mCare \u2192 Success."
+      },
+      {
+        title: "Negative & Exception Scenarios",
+        flow: ["Permission Missing", "Sync Delayed", "Bridge App Missing"],
+        description: "Validating failure guidance: Requesting required permissions, handling 15-30 min sync delays, or guiding users to disable battery optimization."
+      }
     ],
-    outcome:
-      "Delivered a complete research and design specification covering 10 wearable brands. The dynamic UI proposal eliminated the need for hard-coded screens, resolving the scalability bottleneck, reducing drop-off rates, and providing a robust framework for future wearable integrations.",
+    outcome: "Delivered a structured Vendor Compatibility Matrix documenting connection methods, required applications, permission requirements, supported metrics, synchronization characteristics, and expected user guidance. This provided a structured test basis for vendor-specific test scenarios, regression testing, and identifying unsupported conditions.",
     lessons: [
-      "Hardware Fragmentation is Real: Native integration (Garmin, Samsung) versus cloud-mediated or bridge-app integration (Huawei) requires entirely different user guidance.",
-      "Real-time is an Illusion: Most wearable data flows rely on periodic background syncs with inherent 15-30 minute delays; the UX must manage user expectations accordingly.",
-      "Permissions are Multi-layered: A successful sync requires OS-level background permissions, unrestricted battery settings, and explicit Health Connect Read/Write access.",
-      "Scalability over Shortcuts: While a generic guide would save development time, investing in a dynamic, brand-specific UI dramatically improves user conversion and reduces long-term customer support costs."
+      "Integration Testing Must Consider the Full Data Chain: Testing the UI alone is not sufficient. A failure at any point (Vendor \u2192 Cloud \u2192 Health Connect \u2192 mCare) affects the final result.",
+      "'Connected' Is Not Enough: A connection status should be based on observable validation conditions rather than only a UI action or permission state.",
+      "Permissions Are Part of the Test Environment: OS-level permissions, Health Connect permissions, and battery settings directly affect test results.",
+      "Asynchronous Data Requires Different Expectations: Delayed synchronization should not automatically be treated as a defect. Test scenarios need clear timing assumptions.",
+      "Vendor Differences Require Parameterised Testing: Different flows should be validated using consistent test criteria while allowing vendor-specific prerequisites."
     ],
     selectedEvidence: [
       {
         label: "RESEARCH & SYSTEM DESIGN",
         title: "Wearable Ecosystem Integration Research",
         description: "A comprehensive analysis of 10 wearable brands, detailing data flow architectures, compatibility matrices, and the proposed Dynamic Selection UI flow.",
-        href: "/evidence/Wearable_Integration_Research.pdf",
+        href: "/evidence/TMA/Research/Đặc_Tả_Kỹ_Thuật_Hệ_Thống_Đồng_Bộ_Health_Connect.pdf",
         fileType: "pdf",
-        action: "View Research Document \u2192",
+        action: "View Research Document",
         external: true
       }
-    ],
-    disclosure:
-      "This public case study has been anonymised. It represents a real-world integration research and UX/UI redesign project for synchronising 10 different wearable ecosystems into a central healthcare application via Android Health Connect.",
+    ]
   },
   {
     slug: "homecare-workflow-mapping",
-    title: "Homecare User Flow & Cross-system Process Mapping",
-    subtitle: "Mapping a multi-system homecare subscription and service activation journey across users, a healthcare platform and an external service provider.",
+    title: "Homecare Cross-System Integration & Test Scenario Design",
+    subtitle: "Mapped a multi-system healthcare service journey and translated authentication states, API dependencies, asynchronous processing, and exception paths into a structured basis for integration and end-to-end test scenario design.",
     domain: "Healthcare / Homecare Services",
-    role: "Business Analyst Intern",
+    role: "BA & QA Intern — Process Mapping & Test Scenario Design",
     period: "2026",
-    type: "Anonymised Internship Deliverable",
+    type: "Anonymised Internship Case Study",
     category: "internship",
     publicLabel: "Internship Deliverable",
     isAnonymised: true,
     confidentialityNotice: "Selected business and product details have been anonymised due to confidentiality.",
     tags: [
+      "Integration Testing",
+      "E2E Test Design",
       "User Flow",
-      "Swimlane",
-      "Process Mapping",
-      "Cross-system Flow",
-      "Exception Handling",
-      "Authentication Flow",
-      "Requirement Clarification"
+      "API Flow",
+      "Authentication",
+      "Async Processing",
+      "Exception Handling"
     ],
-    problem: "A homecare service required a clear end-to-end view of how users registered, authenticated, subscribed to a service and moved between a healthcare platform and an external service provider.",
+    problem: "A Homecare service involved interactions between three major actors/systems: User \u2192 Homecare Platform \u2192 External Service Provider (VNPT).\n\nThe flow included different authentication states, system hand-offs, asynchronous processing, and multiple exception paths.\n\nWithout a consolidated end-to-end flow, it was difficult to clearly identify system boundaries, expected state transitions, failure conditions, and the scenarios that QA needed to validate.",
     summaryMetrics: [
       { value: "3", label: "Cross-system Actors" },
       { value: "5+", label: "Exception Paths Mapped" },
@@ -111,71 +118,107 @@ export const projects: Project[] = [
       "Decision Mapping",
       "Exception Flow"
     ],
-    disclosure: "This public visual has been recreated and anonymised. It represents a real-world integration workflow between a healthcare platform (Homecare) and a telecommunications/service provider (VNPT).",
-    overview: "A homecare service required a clear end-to-end view of how users registered, authenticated, subscribed to a service, and moved between the Homecare platform and an external service provider (VNPT). The workflow involved several systems, alternative user paths, asynchronous API processing, and multiple failure or recovery scenarios. The deliverable was created as a shared visual reference for requirement clarification and technical alignment between business and development teams.",
+    disclosure: "This public visual has been recreated and anonymised. It represents a real-world healthcare integration workflow between a Homecare platform and an external service provider.",
+    overview: "The objective was to analyse the business requirements and model the complete cross-system journey so that the resulting flow could serve as a common basis for integration test scenario design, end-to-end validation, asynchronous processing validation, and developer alignment.\n\nThe process map transformed a complex business workflow into explicit testable boundaries.",
     businessProblem: [
-      "Responsibilities were distributed across the User, the Homecare platform, and VNPT.",
-      "Users could enter the flow from different authentication states (Guest vs. Logged in).",
-      "System responses from VNPT were asynchronous, requiring polling or webhook handling.",
-      "The process contained several validation, failure, retry, and recovery paths that were previously undocumented.",
-      "Redirects and system hand-offs caused friction in the user experience."
+      "Distributed Responsibilities: Different actions and state changes were handled by User, Homecare frontend/backend, and VNPT system.",
+      "Authentication States: The same business flow could begin from Guest User or Authenticated User.",
+      "Asynchronous Processing: The process needed to account for loading/pending states, delayed responses, callbacks, and timeout conditions.",
+      "Exception Handling: The flow included potential validation failures, external service failures, rejected transactions, and retry paths."
     ],
     responsibilities: [
-      "Reviewed the available workflow and supporting business requirements.",
-      "Identified actors (User), internal systems (Homecare), and external dependencies (VNPT).",
-      "Modelled the end-to-end user journey using a cross-system BPMN-style swimlane diagram.",
-      "Mapped alternative, exception, failure, retry, and recovery paths alongside the happy path.",
-      "Clarified the relationship between frontend user actions and backend API responses."
+      "Reviewed business requirements and available workflow documentation.",
+      "Identified users, internal systems, external dependencies, and major system boundaries.",
+      "Modelled the end-to-end workflow using a cross-system BPMN-style swimlane diagram.",
+      "Mapped the happy path together with alternative, exception, failure, retry, and recovery paths.",
+      "Clarified relationships between frontend actions, backend processing, and external service responses.",
+      "Used the final process map as a basis for structured integration and E2E test scenario design."
     ],
-    solution: [
-      "Delivered a comprehensive cross-system swimlane diagram mapping the exact interactions between Users, Homecare, and VNPT.",
-      "Visualised the authentication gates, asynchronous loading states, and error-handling mechanisms.",
-      "Established a clear baseline for developers to build API integrations and for QA to design edge-case test scenarios."
+    testingObjective: {
+      description: "One of the main values of the process mapping was making hidden decision points visible, providing a direct basis for test design:",
+      focusCards: [
+        { title: "Authentication Check", description: "Guest \u2192 Login Required | Authenticated \u2192 Continue" },
+        { title: "External Processing", description: "Request Accepted \u2192 Pending | Result Successful \u2192 Activate / Update State" },
+        { title: "Exception Handling", description: "Result Failed \u2192 Error / Recovery | No Response \u2192 Timeout / Retry" }
+      ]
+    },
+    testingApproach: [
+      {
+        title: "Authentication & Authorization Testing",
+        flow: ["Guest Entry", "Authenticated Entry", "Secure Hand-off"],
+        description: "Verify service access behaviour for Guest users. Verify that authenticated users can continue without repeating the login step."
+      },
+      {
+        title: "End-to-End Integration Test Design",
+        flow: ["Homecare", "VNPT", "Database Update"],
+        description: "Designed E2E integration scenarios to validate the complete service activation journey from Homecare to VNPT and back."
+      },
+      {
+        title: "Asynchronous Processing Testing",
+        flow: ["Pending State", "Timeout Handling", "Delayed Callback"],
+        description: "Verify expected behaviour while the external request is still pending. Validate timeout handling when no response is received."
+      },
+      {
+        title: "Exception & Recovery Testing",
+        flow: ["Service Unavailable", "Payment Rejected", "Retry Mechanism"],
+        description: "Validate behaviour when the external service is unavailable, payment is rejected, or asynchronous callback is lost."
+      }
     ],
-    outcome: "The final flowchart provided a consolidated view of the user journey, system responsibilities, API decision points, and exception paths. It successfully bridged the communication gap between business stakeholders and technical teams, accelerating the VNPT integration process.",
+    deepDive: {
+      flow: ["Access Service", "Authentication Check", "Process Request", "Send to VNPT", "VNPT Callback", "Update State"],
+      description: [
+        "User accesses the Homecare Service.",
+        "Authentication check branches to Login or continues.",
+        "Homecare processes the request and sends it to VNPT.",
+        "Request enters a pending/loading state.",
+        "VNPT callback returns Success, Failure, or Timeout.",
+        "Homecare updates the final state based on the callback."
+      ]
+    },
+    outcome: "The final flowchart provided a consolidated view of the user journey, system responsibilities, API decision points, and exception paths. It successfully bridged the communication gap between business stakeholders and technical teams, accelerating the VNPT integration process and establishing a baseline for comprehensive QA.",
     lessons: [
-      "A successful user action does not always produce an immediate system result; asynchronous processing must be reflected in the UX.",
-      "Guest and authenticated users require distinct flows and security controls before triggering external billing/subscription APIs.",
-      "Exception and recovery paths are just as critical as the happy path when integrating third-party services.",
-      "Visual swimlanes are highly effective in clarifying boundaries of responsibility between internal platforms and external vendors."
+      "Integration Testing Requires System-Level Thinking: The full chain must be considered: User \u2192 Frontend \u2192 Backend \u2192 External Service \u2192 Response / Callback \u2192 Final User State.",
+      "Authentication State Is a Test Variable: Guest and authenticated users may enter the same business process but follow different expected paths.",
+      "Asynchronous Processes Require State-Based Testing: Testing must distinguish between Requested \u2192 Pending \u2192 Completed / Failed / Timeout.",
+      "Exception Paths Are Part of the Main Test Scope: For third-party integrations, failure and recovery scenarios are as important as the happy path.",
+      "Swimlane Mapping Improves Testability: Separating responsibilities makes it easier to identify test boundaries, ownership of state changes, and integration points."
     ],
     selectedEvidence: [
       {
         label: "PROCESS MAP",
-        title: "Homecare & VNPT Swimlane Diagram",
-        description: "A cross-system flowchart detailing user authentication, service subscription, and asynchronous API interactions between Homecare and VNPT.",
+        title: "Homecare & VNPT Cross-System Swimlane Diagram",
+        description: "A recreated and anonymised cross-system flow showing authentication gates, service activation, system hand-offs, asynchronous processing, decision points, and exception paths.",
         href: "/evidence/TMA/Homecare-User-Flow-Diagram.pdf",
         fileType: "pdf",
         action: "View Diagram",
         external: true
       }
     ]
-
   },
   {
     slug: "clinical-feature-catalogue",
-    title: "Clinical Feature Catalogue & Scope Analysis",
-    subtitle: "Consolidating fragmented healthcare product requirements into a structured, scoped and traceable feature catalogue.",
+    title: "Clinical Feature Catalogue & Test Basis Analysis",
+    subtitle: "Consolidated fragmented healthcare requirements into a structured test basis, defining functional scope, traceability, and coverage foundations for downstream test design and UAT.",
     domain: "Healthcare / Electronic Medical Records",
-    role: "Business Analyst Intern",
+    role: "BA & QA Intern — Requirement Analysis & Test Basis Definition",
     period: "2026",
-    type: "Anonymised Internship Deliverable",
+    type: "Anonymised Internship Case Study",
     category: "internship",
     publicLabel: "Internship Deliverable",
     isAnonymised: true,
     confidentialityNotice: "Selected business and product details have been anonymised due to confidentiality.",
-    disclosure: "AI-assisted research tools (Rovo Feature Analysis and NotebookLLM) were used to accelerate source discovery and initial information extraction. Scope definition, feature grouping, deduplication, terminology standardisation and final validation remained Business Analyst responsibilities.",
+    disclosure: "AI-assisted tools were used to accelerate information discovery and extraction, while scope definition, requirement interpretation, and final validation remained manual responsibilities.",
     tags: [
-      "Feature Analysis",
-      "Scope Management",
-      "Requirements Synthesis",
-      "Functional Taxonomy",
+      "Test Basis",
+      "Requirement Analysis",
+      "Test Coverage",
       "Traceability",
-      "Healthcare EMR",
-      "AI-assisted Research"
+      "Scope Analysis",
+      "Healthcare QA",
+      "UAT"
     ],
-    overview: "Product requirements were distributed across 91 CAF epics, 54 PRD epics, and over 200 related tickets. The objective was to consolidate this massive volume of information into a structured feature catalogue for four core healthcare modules: Patient Records & Clinical Management, Medications & Lab/Clinical Results Processing, Telemedicine, and Administration & Audit. The catalogue needed to define scope, organise features by user journey, standardise terminology, and create identifiers that could later support User Story and Test Case references.",
-    problem: "Product requirements were distributed across 91 CAF epics, 54 PRD epics, and over 200 related tickets. The objective was to consolidate this massive volume of information into a structured feature catalogue for four core healthcare modules: Patient Records & Clinical Management, Medications & Lab/Clinical Results Processing, Telemedicine, and Administration & Audit.",
+    overview: "The objective was to consolidate the available requirements into a structured Test Basis covering four core healthcare modules.\n\nThe catalogue was designed to support: Requirement Clarification \u2192 Test Scenario Identification \u2192 Test Case Preparation \u2192 UAT.",
+    problem: "Healthcare product requirements were distributed across 91 CAF epics, 54 PRD epics, and more than 200 related tickets.\n\nThe fragmented and overlapping information created testing risks: Unclear functional scope, duplicate or overlapping features, inconsistent terminology, missing requirement context, and difficulty identifying complete test coverage.\n\nWithout a consolidated reference, QA teams could have difficulty determining what needs to be tested, where a feature belongs, and whether important scenarios are covered.",
     summaryMetrics: [
       { value: "345", label: "Healthcare Features" },
       { value: "54", label: "Functional Groups" },
@@ -184,33 +227,62 @@ export const projects: Project[] = [
     ],
     scope: "The catalogue needed to define scope, organise features by user journey, standardise terminology, and create identifiers that could later support User Story and Test Case references.",
     cardArtefacts: [
-      "Scope Definition",
-      "Feature Taxonomy",
-      "Traceability",
-      "Requirement Synthesis"
+      "Test Basis",
+      "Functional Scope",
+      "Traceability Structure",
+      "Coverage Foundation"
     ],
     businessProblem: [
-      "Similar capabilities were described using different names across legacy systems and new product requirements.",
-      "Features appeared across multiple fragmented documents (CAF and PRD epics) and ticket sources.",
-      "Functional boundaries between healthcare modules were not always explicit (e.g., distinguishing core Patient Records from Appointments or Inventory).",
-      "Duplicate or overlapping capabilities needed to be identified and merged.",
-      "Teams needed a consistent reference for feature discussions and traceability."
+      "Fragmented Requirements: The same functional capability could appear across different epics, PRDs, or tickets, making it difficult to establish a reliable testing scope.",
+      "Inconsistent Terminology: Similar functions were sometimes described using different names, increasing the risk of duplicated or inconsistent test scenarios.",
+      "Unclear Functional Boundaries: Some capabilities could potentially belong to multiple modules. Clear inclusion and exclusion rules were therefore required to prevent scope overlap.",
+      "Missing Traceability: Without a structured identifier and reference system, it was difficult to trace a feature from its original requirement source to downstream testing activities.",
+      "QA Risk: These issues could result in Missed Scenarios \u2192 Incomplete Coverage \u2192 Requirement Gaps \u2192 Defects Escaping Validation."
     ],
     responsibilities: [
-      "Reviewed 91 CAF epics, 54 PRD epics, and supporting ticket documentation.",
-      "Defined strict inclusion and exclusion rules for selected modules (e.g., isolating Patient Records from Appointments and Inventory).",
-      "Extracted and grouped capabilities by functional domain and chronological user journey (e.g., Patient Creation → Demographics → Care Team → Clinical Charting).",
-      "Standardised feature names and prepared concise acceptance-oriented behaviour descriptions.",
-      "Created hierarchical feature identifiers (e.g., structured as [Group].[Sequence Number], such as A1.1 or B3.2) for seamless traceability.",
-      "Reviewed AI-assisted findings (Rovo and NotebookLLM) and manually validated scope, terminology and domain meaning."
+      "Reviewed 91 CAF epics, 54 PRD epics, and 200+ related tickets.",
+      "Defined inclusion and exclusion boundaries for selected functional modules.",
+      "Grouped features according to functional domains and user journeys.",
+      "Standardised feature names and behaviour descriptions into a consistent format.",
+      "Created hierarchical feature identifiers to support traceability.",
+      "Reviewed AI-assisted findings and manually validated functional context, RBAC conditions, and domain-specific behaviour.",
+      "Identified requirements and functional areas that could be used as a basis for downstream test scenario and UAT preparation."
+    ],
+    testingObjective: {
+      description: "Feature descriptions were structured around observable system behaviour where possible, allowing QA teams to identify:",
+      focusCards: [
+        { title: "Test Scenarios", description: "Functional scenarios, positive/negative conditions, and edge cases." },
+        { title: "Business Rules", description: "Role-based scenarios and business-rule validations." },
+        { title: "Traceability", description: "A structured identifier convention (e.g., A1.1 \u2192 A1.2) to make features easier to reference." }
+      ]
+    },
+    testingApproach: [
+      {
+        title: "Test Basis Pipeline",
+        flow: ["Requirements", "Scope Definition", "Feature Extraction", "Test Basis"],
+        description: "Transforming raw requirements into a structured Functional Test Basis."
+      },
+      {
+        title: "Traceability Pipeline",
+        flow: ["Epic", "Feature", "Test Scenario", "Test Case", "UAT"],
+        description: "Maintaining a clear relationship between what the system is expected to do and how that behaviour will be validated."
+      }
+    ],
+    outcome: "The final catalogue consolidated 345 distinct healthcare features. The resulting catalogue provided a structured basis for identifying functional scope, analysing potential coverage gaps, and preparing downstream test scenarios.",
+    lessons: [
+      "Test Coverage Starts with a Reliable Test Basis: Before designing hundreds of test cases, QA needs a clear understanding of what functionality is actually within scope.",
+      "Scope Boundaries Prevent Testing Gaps: Separating related but different functional areas reduces the risk of duplicated scenarios and uncovered requirements.",
+      "Requirements Must Be Testable: A useful requirement should provide enough clarity for QA to determine: Input \u2192 Expected Behaviour \u2192 Validation Condition.",
+      "Traceability Supports Defect Analysis: When a defect can be connected back to a specific feature and requirement, it becomes easier to determine its expected behaviour and impact.",
+      "AI Can Accelerate Analysis, but Validation Remains Human: Final decisions regarding functional scope, requirement meaning, and testability required manual review and validation."
     ],
     analysisEvidenceLabel: "Evidence",
     selectedEvidence: [
       {
         label: "FEATURE LIST",
         title: "Patient Records Feature Catalogue",
-        description: "A structured catalogue of 71 features covering the patient lifecycle, from demographics and care team assignment to clinical charting and privacy directives.",
-        href: "/evidence%20TMA/Feature%20List/QU%E1%BA%A2N%20L%C3%9D%20H%E1%BB%92%20S%C6%A0%20B%E1%BB%86NH%20NH%C3%82N.pdf",
+        description: "71 features covering patient demographics, care team assignment, clinical charting, and privacy-related functionality.",
+        href: "/evidence/TMA/Feature List/QUẢN LÝ HỒ SƠ BỆNH NHÂN.pdf",
         action: "View Feature List",
         fileType: "pdf",
         external: true
@@ -218,8 +290,8 @@ export const projects: Project[] = [
       {
         label: "FEATURE LIST",
         title: "Medications & Labs Feature Catalogue",
-        description: "Detailed specification of 91 features managing e-prescribing, medication reconciliation, inpatient eMAR, and the automated processing of incoming lab results.",
-        href: "/evidence%20TMA/Feature%20List/K%C3%8A%20%C4%90%C6%A0N%20%26%20X%E1%BB%AC%20L%C3%9D%20K%E1%BA%BET%20QU%E1%BA%A2%20L%C3%82M%20S%C3%80NG.pdf",
+        description: "91 features covering e-prescribing, medication reconciliation, inpatient eMAR, and clinical result processing.",
+        href: "/evidence/TMA/Feature List/KÊ ĐƠN & XỬ LÝ KẾT QUẢ LÂM SÀNG.pdf",
         action: "View Feature List",
         fileType: "pdf",
         external: true
@@ -227,8 +299,8 @@ export const projects: Project[] = [
       {
         label: "FEATURE LIST",
         title: "Telemedicine Feature Catalogue",
-        description: "Defined 79 features mapping the virtual care workflow, including provider schedule rules, appointment modes, and the patient virtual waiting room experience.",
-        href: "/evidence%20TMA/Feature%20List/TELEMEDICINE.pdf",
+        description: "79 features covering provider schedules, appointment modes, and virtual care workflows.",
+        href: "/evidence/TMA/Feature List/TELEMEDICINE.pdf",
         action: "View Feature List",
         fileType: "pdf",
         external: true
@@ -236,36 +308,21 @@ export const projects: Project[] = [
       {
         label: "FEATURE LIST",
         title: "Administration & Audit Feature Catalogue",
-        description: "Documented 104 system governance features encompassing role-based access control (RBAC), continuous audit logging, and compliance-driven onboarding/offboarding workflows.",
-        href: "/evidence%20TMA/Feature%20List/QU%E1%BA%A2N%20TR%E1%BB%8A%20%26%20KI%E1%BB%82M%20TO%C3%81N.pdf",
+        description: "104 features covering RBAC, audit logging, and governance-related workflows.",
+        href: "/evidence/TMA/Feature List/QUẢN TRỊ & KIỂM TOÁN.pdf",
         action: "View Feature List",
         fileType: "pdf",
         external: true
       }
-    ],
-    solution: [
-      "Designed a tiered functional taxonomy, categorising raw requirements into 4 core healthcare modules and 54 logical groups aligned with clinical workflows.",
-      "Standardised the requirement format to include strict Actor scopes, Feature Names, and Acceptance-oriented capability descriptions.",
-      "Established a unified hierarchical identifier convention (e.g., [Group].[Sequence Number]) to ensure seamless backward and forward traceability."
-    ],
-    outcome: "The deliverable successfully created a structured, comprehensive reference mapping 345 distinct healthcare features across 54 functional groups (covering Patient Records, Medications/Labs, Telemedicine, and Admin/Audit). This catalogue now serves as a single source of truth that supports requirement discussions, User Story decomposition, Test Case preparation, and future scope analysis.",
-    lessons: [
-      "Scope Isolation is Critical: Managing 345 distinct features across 54 functional groups taught me that defining strict functional boundaries (e.g., separating Clinical Charting from Medication Safety) is essential to prevent requirement overlap in complex enterprise systems.",
-      "Taxonomy Must Follow the User Journey: Structuring the catalogue chronologically—such as mapping the flow from Patient Creation to Discharge Reconciliation—makes requirements significantly more intuitive for development teams than grouping them solely by backend architecture.",
-      "Healthcare Demands Exceptional Precision: Features related to Medication Safety (e.g., Drug-Drug Interactions) or System Governance (e.g., \"Break Glass\" emergency access) require meticulous Acceptance Criteria. In the MedTech domain, requirement ambiguity directly impacts patient safety and strict PHIPA compliance.",
-      "Traceability is the Backbone of QA: Establishing a hierarchical identifier system (e.g., A1.1, B3.2) was not just an administrative task. It became the crucial link connecting high-level business epics to downstream User Stories, UAT execution, and FHIR API integrations.",
-      "AI as a Co-pilot, Not an Autopilot: While tools like Rovo and NotebookLLM drastically accelerated the extraction of information, the final validation of clinical workflows, role-based access controls (RBAC), and domain semantics strictly required a Business Analyst's critical thinking."
     ]
   },
-
-
   {
     slug: "online-food-delivery-system",
     category: "academic",
     title: "Online Food Delivery System",
     subtitle: "A multi-role food delivery workflow connecting Customers, Restaurants, Shippers and Administrators was analysed to reconstruct intended business requirements, TO-BE processes and validation rules from the existing system behaviour.",
     domain: "Food Delivery / Marketplace",
-    role: "Business Analyst — Individual Portfolio Reconstruction & Validation",
+    role: "BA Case Study — Requirement Analysis, Business Rules & UAT Validation",
     period: "Original Project: 2025 | BA Case Study Reconstruction: 2026",
     type: "BA Case Study",
     tags: [
@@ -436,11 +493,11 @@ export const projects: Project[] = [
   {
     slug: "web-functional-testing",
     category: "academic",
-    title: "Web Functional Testing & Selenium Automation",
-    subtitle: "Designed and executed 30 functional test cases across core e-commerce workflows, with Selenium IDE-assisted validation of dynamic content, calculations, state persistence and cross-page data consistency.",
+    title: "Web Functional Testing & Selenium IDE Automation",
+    subtitle: "Designed and executed 30 functional test cases across core e-commerce workflows, combining manual testing with Selenium IDE-assisted validation of dynamic content, business rules, calculations, state persistence, and cross-page data consistency.",
     domain: "E-commerce / Software Quality Assurance",
-    role: "Test Analyst — Academic Project",
-    period: "2025",
+    role: "Software Tester — Academic Project",
+    period: "January 2026 – April 2026",
     type: "Academic Software Testing Case Study",
     tags: [
       "30 Test Cases",
@@ -448,31 +505,38 @@ export const projects: Project[] = [
       "Selenium IDE",
       "Business Rule Validation",
       "Data Validation",
-      "Test Automation",
+      "Requirement-Based Testing"
     ],
-    problem: "The project evaluated critical e-commerce workflows through 30 structured functional test cases on the TNC Store website. The scope covered authentication, product discovery, shopping-cart behaviour, form validation, dynamic pricing, discount calculations, session persistence and product-data consistency, with emphasis on comparing expected behaviour against actual system behaviour.",
-    overview: "The project evaluated critical e-commerce workflows through 30 structured functional test cases on the TNC Store website. The scope covered authentication, product discovery, shopping-cart behaviour, form validation, dynamic pricing, discount calculations, session persistence and product-data consistency, with emphasis on comparing expected behaviour against actual system behaviour.\n\nTesting included straightforward functional scenarios as well as more analytical validations involving dynamic lists, independently calculated values, cross-session state persistence and normalized product data.",
-    scope: "",
+    problem: "The project focused on validating critical e-commerce workflows on the TNC Store website through a structured 30-test-case functional test suite.\n\nThe testing scope covered authentication, product discovery, shopping-cart behaviour, form validation, dynamic pricing, discount calculations, session persistence, and product-data consistency.\n\nThe main objective was to compare expected behaviour against actual system behaviour and identify functional, validation, calculation, state, and data-consistency issues.",
+    overview: "The project combined manual functional testing with Selenium IDE-assisted automation.\n\nIn addition to standard functional scenarios, the testing approach covered more analytical validation involving:\n- Dynamic product lists\n- Independent calculation of expected values\n- Business-rule validation\n- Cross-session state persistence\n- Cross-page data consistency\n- Data extraction and normalization",
     disclosure: "This was an academic software testing exercise conducted against a publicly accessible e-commerce website and was not commissioned by or affiliated with TNC Store.",
     cardArtefacts: [
-      "Test coverage map",
-      "Selenium validation flow",
-      "Data integrity validation",
+      "30 Functional Test Cases",
+      "Selenium IDE Scenarios",
+      "Test Execution Evidence",
     ],
     testingObjective: {
-      description: "The objective was to validate whether critical e-commerce functions behaved consistently with their expected results across normal, negative and data-dependent scenarios. The scope covered not only visible UI responses but also calculations, result-set accuracy, state persistence and cross-page data consistency.",
+      description: "The objective was to determine whether critical e-commerce functions behaved consistently with their expected results across normal, negative, validation, and data-dependent scenarios.",
       focusCards: [
         {
           title: "Functional Correctness",
           description: "Validate expected behaviour across core user workflows."
         },
         {
+          title: "Negative & Edge-Case Testing",
+          description: "Verify failure conditions, validation rules, and boundary-related behaviour."
+        },
+        {
           title: "Business Rule Validation",
-          description: "Independently verify limits, calculations, pricing and discount behaviour."
+          description: "Independently verify pricing, discount, quantity, and calculation logic."
         },
         {
           title: "Data Consistency",
-          description: "Check whether information remains consistent across pages, sessions and different representations."
+          description: "Check whether information remained consistent across pages, sessions, and different representations."
+        },
+        {
+          title: "State Validation",
+          description: "Verify that application state and user data persisted correctly across workflow transitions."
         }
       ]
     },
@@ -509,17 +573,17 @@ export const projects: Project[] = [
       }
     ],
     responsibilities: [
-      "Designed 30 functional test cases covering critical e-commerce workflows, including positive, negative and edge-case scenarios.",
-      "Defined test scenarios, execution steps, expected results and observable validation criteria.",
-      "Applied Selenium IDE-based browser automation to validate dynamic lists, search/filter behaviour and state-dependent workflows.",
-      "Independently derived expected values to validate cart totals, pricing and discount calculations against actual website output.",
-      "Validated cross-session persistence and cross-page product-data consistency through extraction, Regex-based normalization and comparison.",
-      "Logged observed mismatches where actual behaviour did not satisfy expected validation criteria."
+      "Designed 30 functional test cases covering positive, negative, validation, and edge-case scenarios.",
+      "Defined test scenarios, execution steps, expected results, and observable validation criteria.",
+      "Executed test cases and compared actual results against expected behaviour.",
+      "Applied Selenium IDE-based browser automation to validate dynamic lists, search/filter behaviour, calculations, and state-dependent workflows.",
+      "Independently derived expected values to validate cart totals, pricing, and discount calculations.",
+      "Validated cross-session persistence and cross-page product-data consistency through extraction, normalization, and comparison.",
+      "Recorded observed mismatches where actual behaviour did not satisfy the defined validation criteria."
     ],
-    users: [],
     testingApproach: [
       {
-        title: "01 — Scenario Design",
+        title: "01 — Test Design",
         flow: [
           "Expected Behaviour",
           "Test Scenario",
@@ -527,10 +591,10 @@ export const projects: Project[] = [
           "Test Steps",
           "Expected Result"
         ],
-        description: "Each test case defined the behaviour to validate, the execution sequence and the expected observable result."
+        description: "Each test case defined the behaviour under validation, execution sequence, and expected observable result."
       },
       {
-        title: "02 — Execution & Validation",
+        title: "02 — Test Execution & Validation",
         flow: [
           "Browser Interaction",
           "Actual Result",
@@ -538,7 +602,7 @@ export const projects: Project[] = [
           "Pass / Fail",
           "Investigation"
         ],
-        description: "Execution focused on observable system behaviour rather than simply confirming that an interaction completed."
+        description: "Execution focused on whether the system produced the expected outcome rather than simply confirming that an interaction completed."
       },
       {
         title: "03 — Automated Validation",
@@ -547,9 +611,9 @@ export const projects: Project[] = [
           "Extract",
           "Normalize / Calculate",
           "Compare",
-          "Log Result"
+          "Result"
         ],
-        description: "More analytical scenarios required iterating through dynamic content, extracting values, normalizing data or independently calculating expected results before comparison."
+        description: "Analytical scenarios required iterating through dynamic content, extracting values, normalizing data, or independently calculating expected results before comparison."
       }
     ],
     selectedTestCases: {
@@ -559,57 +623,57 @@ export const projects: Project[] = [
           id: "TC-05",
           name: "Product Sorting by Price — Low to High",
           focus: "Result ordering",
-          validationLogic: "Load the complete product list and sequentially compare each displayed price with the next value.",
+          validationLogic: "Load the product list and sequentially compare each displayed price with the next value.",
           demonstrates: "Dynamic-list validation and ordered-data comparison."
         },
         {
           id: "TC-06",
           name: "Product Filtering by Brand",
           focus: "Filter accuracy",
-          validationLogic: "Apply a brand filter, iterate through all displayed products and verify that each result matches the selected brand.",
+          validationLogic: "Apply a brand filter, iterate through displayed products, and verify that each result matches the selected brand.",
           demonstrates: "Result-set validation and detection of unrelated items."
         },
         {
           id: "TC-07",
           name: "Product Count Consistency",
           focus: "Catalogue completeness",
-          validationLogic: "Extract the expected product count, repeatedly load all remaining items and compare the final rendered count against the advertised value.",
+          validationLogic: "Extract the expected product count, load remaining items, and compare the final rendered count against the advertised value.",
           demonstrates: "Expected-vs-actual comparison across dynamically loaded content."
         },
         {
           id: "TC-16",
           name: "Mandatory Field Validation on Product Review Form",
-          focus: "Negative testing",
+          focus: "Negative Testing",
           validationLogic: "Submit the review form with required inputs missing and verify that submission is blocked with validation feedback.",
           demonstrates: "Failure-path and validation-rule testing."
         },
         {
           id: "TC-20",
           name: "Dynamic Price Deduction — PC Builder",
-          focus: "Calculation validation",
-          validationLogic: "Record initial total and removed-item price, then verify: New Total = Initial Total - Removed Item Price",
+          focus: "Calculation Validation",
+          validationLogic: "Record initial total and removed-item price, then verify: New Total = Initial Total − Removed Item Price",
           demonstrates: "Independent mathematical verification of dynamic UI calculations."
         },
         {
           id: "TC-24",
           name: "Discount Logic Validation",
           focus: "Business Rule Validation",
-          validationLogic: "Extract original price, discounted price and displayed discount percentage. Independently calculate the expected discount and compare it with the website value.",
+          validationLogic: "Extract original price, discounted price, and displayed discount percentage. Independently calculate the expected discount and compare it with the website value.",
           demonstrates: "Business-rule and numerical consistency validation."
         },
         {
           id: "TC-29",
-          name: "Shopping Cart Data Retained Post-Authentication",
-          focus: "State persistence",
-          validationLogic: "Add a product during a guest session, authenticate and verify that the same product remains in the authenticated cart.",
+          name: "Shopping Cart Data Retained After Authentication",
+          focus: "State Persistence",
+          validationLogic: "Add a product during a guest session, authenticate, and verify that the same product remains in the authenticated cart.",
           demonstrates: "Cross-state persistence and guest-to-authenticated workflow validation."
         },
         {
           id: "TC-30",
           name: "Data Integrity Validation — Product Name vs Detailed Specifications",
-          focus: "Data consistency",
-          validationLogic: "Iterate through product pages, extract core specifications from product names, normalize values and compare them against detailed specification content.",
-          demonstrates: "Automated data extraction, Regex-based parsing, normalization and Pass / Fail / Skip classification."
+          focus: "Data Consistency",
+          validationLogic: "Iterate through product pages, extract core specifications from product names, normalize values, and compare them against detailed specification content.",
+          demonstrates: "Automated data extraction, Regex-based parsing, normalization, and Pass / Fail / Skip classification."
         }
       ]
     },
@@ -626,19 +690,18 @@ export const projects: Project[] = [
         "Pass / Fail / Skip"
       ],
       description: [
-        "Iterate across products",
-        "Handle missing specification tables",
-        "Extract core attributes such as RAM, storage and GPU series",
-        "Use Regex",
-        "Strip measurement units",
-        "Remove formatting/special characters",
-        "Convert to comparable strings",
-        "Compare the normalized values",
-        "Log Pass, Fail or Skip"
+        "Iterated across multiple product pages.",
+        "Handled missing specification tables.",
+        "Extracted core attributes such as RAM, storage, and GPU series.",
+        "Used Regex-based parsing to extract relevant values.",
+        "Removed measurement units and formatting differences.",
+        "Converted values into comparable representations.",
+        "Compared normalized values across different page sections.",
+        "Classified the result as Pass, Fail, or Skip."
       ]
     },
     automationStrategy: {
-      description: "Selected scenarios used Selenium IDE-based browser automation to validate dynamic lists, search and filter results, calculations, session persistence and data consistency. Rather than relying solely on visible UI outcomes, the tests extracted actual values and compared them against independently derived expected results.",
+      description: "Selected workflows were automated using Selenium IDE to validate dynamic lists, search and filtering behaviour, calculations, session persistence, and data consistency. Rather than relying only on visible UI outcomes, the automated scenarios extracted actual values and compared them with independently derived expected results.",
       blocks: [
         {
           title: "Calculation & Business Rule Validation",
@@ -665,7 +728,7 @@ export const projects: Project[] = [
             "Authenticated Cart",
             "Verify Product Persistence"
           ],
-          evidence: "Evidence: TC-29 — Shopping Cart Data Retained Post-Authentication."
+          evidence: "Evidence: TC-29 — Shopping Cart Data Retained After Authentication"
         },
         {
           title: "Data Validation",
@@ -676,18 +739,18 @@ export const projects: Project[] = [
             "Detailed Specifications",
             "Compare"
           ],
-          evidence: "Evidence: TC-30 — Product Name vs Detailed Specifications."
+          evidence: "Evidence: TC-30 — Product Name vs Detailed Specifications"
         }
       ]
     },
     testingChallenges: [
       {
         title: "Dynamic Calculations",
-        description: "Values such as cart totals, component prices and discounts required independent expected-value calculations."
+        description: "Cart totals, component prices, and discount values required independent expected-value calculations."
       },
       {
         title: "Dynamic Content",
-        description: "Search, filtering and product-count scenarios required iterating through dynamically loaded lists."
+        description: "Search, filtering, and product-count scenarios required iteration across dynamically loaded lists."
       },
       {
         title: "State Persistence",
@@ -699,30 +762,35 @@ export const projects: Project[] = [
       }
     ],
     baRelevance: {
-      description: "This project strengthened my ability to express expected behaviour in observable and testable terms. Designing and executing test cases required identifying validation rules, edge cases and failure conditions — the same thinking used when writing Acceptance Criteria and preparing UAT scenarios.",
+      description: "This project strengthened my ability to convert expected behaviour into observable and testable conditions.",
       links: [
         {
-          title: "Testable Requirements",
-          description: "Expected behaviour must be observable and unambiguous."
+          title: "Testable Behaviour",
+          description: "Expected outcomes should be clear and objectively verifiable."
         },
         {
-          title: "Acceptance Criteria",
-          description: "Failure conditions and edge cases need explicit definition."
+          title: "Negative Testing",
+          description: "Validation should include failure conditions, not only successful flows."
         },
         {
           title: "Business Rule Validation",
-          description: "Implemented calculations and limits must match expected rules."
+          description: "Calculations, limits, and pricing rules should be independently verified where appropriate."
+        },
+        {
+          title: "State Validation",
+          description: "Changes in authentication or workflow state should not introduce unexpected data loss or inconsistency."
+        },
+        {
+          title: "Data Validation",
+          description: "Information displayed across different pages or representations should remain consistent."
         },
         {
           title: "UAT Readiness",
-          description: "Structured scenarios provide a stronger basis for business validation."
+          description: "Well-structured scenarios provide a stronger basis for business validation and user acceptance testing."
         }
       ]
     },
-    approach: [],
-    solution: [],
-    challenges: [],
-    selectedEvidence: [
+    selectedEvidence:[
       {
         label: "Software Testing Report — 30 Functional Test Cases",
         fileType: "pdf",

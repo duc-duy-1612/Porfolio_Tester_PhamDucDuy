@@ -5,6 +5,7 @@ import { profile } from "../../data/profile";
 import { useActiveSection } from "../../hooks/useActiveSection";
 import { optionalUrl, withBasePath } from "../../utils/config";
 import { ThemeToggle } from "./ThemeToggle";
+import { MagneticButton } from "../ui/MagneticButton";
 
 interface HeaderProps {
   theme: "light" | "dark";
@@ -67,10 +68,10 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
             </Link>
           ))}
           {resumeHref && (
-            <a className="nav-cta" href={resumeHref} download>
+            <MagneticButton href={resumeHref} download className="nav-cta">
               <Download aria-hidden="true" size={16} />
               Download CV
-            </a>
+            </MagneticButton>
           )}
         </nav>
 
@@ -102,10 +103,10 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
                 </Link>
               ))}
               {resumeHref && (
-                <a className="nav-cta" href={resumeHref} download>
+                <MagneticButton href={resumeHref} download className="nav-cta">
                   <Download aria-hidden="true" size={16} />
                   Download CV
-                </a>
+                </MagneticButton>
               )}
             </nav>
           </div>

@@ -68,21 +68,21 @@ export function LightboxImage({ src, alt, isOpen, onClose }: LightboxImageProps)
             {/* Toolbar */}
             <div className="absolute top-4 right-4 z-10 flex gap-4">
               <button
-                className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+                className="p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
                 onClick={() => setScale((s) => Math.min(s + 0.5, 5))}
                 aria-label="Zoom in"
               >
                 <ZoomIn size={24} />
               </button>
               <button
-                className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+                className="p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
                 onClick={() => setScale((s) => Math.max(s - 0.5, 0.5))}
                 aria-label="Zoom out"
               >
                 <ZoomOut size={24} />
               </button>
               <button
-                className="p-2 bg-red-500/80 hover:bg-red-500 rounded-full text-white transition-colors ml-4"
+                className="p-3 bg-red-500/80 hover:bg-red-500 rounded-full text-white transition-colors ml-4"
                 onClick={onClose}
                 aria-label="Close"
               >

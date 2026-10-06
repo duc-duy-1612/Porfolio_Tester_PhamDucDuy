@@ -112,8 +112,8 @@ export interface Project {
   type: string;
   tags: string[];
   problem: string;
-  overview: string;
-  scope: string;
+  overview?: string;
+  scope?: string;
   cardArtefacts: string[];
   businessProblem?: string[];
   responsibilities: string[];
@@ -181,7 +181,7 @@ export interface Education {
   degree: string;
   university: string;
   period: string;
-  expectedGraduation: string;
+  expectedGraduation?: string;
   gpa: string;
   coursework: string[];
 }

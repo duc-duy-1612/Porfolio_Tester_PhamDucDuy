@@ -6,6 +6,7 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { FloatingCTA } from "../ui/FloatingCTA";
 import { ScrollProgressBar } from "../ui/ScrollProgressBar";
+import { AnimatedBackground } from "../ui/AnimatedBackground";
 
 export function AppLayout() {
   const { theme, toggleTheme } = useTheme();
@@ -13,6 +14,7 @@ export function AppLayout() {
 
   return (
     <>
+      <AnimatedBackground />
       <ScrollProgressBar />
       <Header theme={theme} onToggleTheme={toggleTheme} />
       <Outlet />

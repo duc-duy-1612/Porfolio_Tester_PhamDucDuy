@@ -28,7 +28,8 @@ export function AboutSection() {
             {profile.contact.profileImage && profile.contact.profileImage !== "TODO_PROFILE_IMAGE" && (
               <img 
                 src={withBasePath(profile.contact.profileImage)} 
-                alt={profile.fullName} 
+                alt={`Portrait of ${profile.fullName}`} 
+                loading="lazy"
                 className="about-avatar" 
               />
             )}

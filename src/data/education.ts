@@ -4,9 +4,9 @@ export const education: Education = {
   degree: "BACHELOR OF ENGINEERING IN INFORMATION TECHNOLOGY",
   university: "Ho Chi Minh City University of Technology",
   period: "2022 - 2026",
-  expectedGraduation: "September 2026",
-  gpa: "3.4/4.0",
+  gpa: "3.41/4.0",
   coursework: [
+    "Software Testing & Quality Assurance",
     "Systems Analysis and Design",
     "Database Systems",
     "Software Engineering",
