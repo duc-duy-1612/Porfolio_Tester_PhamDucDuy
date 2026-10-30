@@ -40,15 +40,15 @@ export function AnimatedBackground() {
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    const numStars = 130;
+    const numStars = 180;
     const stars: Star[] = [];
     for (let i = 0; i < numStars; i++) {
       stars.push({
         x: (Math.random() - 0.5) * width * 1.5,
         y: (Math.random() - 0.5) * height * 1.5,
         z: Math.random() * 1000 + 1,
-        size: Math.random() * 1.5 + 0.5,
-        alpha: Math.random() * 0.6 + 0.2,
+        size: Math.random() * 1.8 + 0.8,
+        alpha: Math.random() * 0.4 + 0.55,
       });
     }
 
@@ -75,12 +75,17 @@ export function AnimatedBackground() {
         const py = star.y * k + height / 2 + mouseY * (1000 - star.z) * 0.0008;
 
         if (px >= 0 && px <= width && py >= 0 && py <= height) {
-          const depthAlpha = (1 - star.z / 1000) * star.alpha;
-          const radius = (1 - star.z / 1000) * star.size + 0.3;
+          const depthAlpha = Math.min(1, (1 - star.z / 1000) * star.alpha * 1.25);
+          const radius = (1 - star.z / 1000) * star.size + 0.6;
 
           ctx.beginPath();
           ctx.arc(px, py, radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(147, 197, 253, ${depthAlpha})`;
+          // Alternate subtle bright white and celestial cyan for sparkling contrast
+          if (i % 3 === 0) {
+            ctx.fillStyle = `rgba(255, 255, 255, ${depthAlpha})`;
+          } else {
+            ctx.fillStyle = `rgba(186, 230, 253, ${depthAlpha})`;
+          }
           ctx.fill();
         }
       }
@@ -102,7 +107,7 @@ export function AnimatedBackground() {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ opacity: 0.85 }}
+        style={{ opacity: 1 }}
       />
       <motion.div
         animate={{
