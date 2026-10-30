@@ -15,6 +15,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <TiltCard>
       <article className={`project-card h-full ${isFeatured ? "project-card--featured" : ""}`}>
+        {isFeatured && (
+          <div className="cyber-radar-scan" aria-hidden="true">
+            <div className="cyber-scanline" />
+          </div>
+        )}
         <Link className="project-card__preview" to={`/projects/${project.slug}`} aria-label={`View ${project.title}`}>
           <ArtefactPreview artefact={project.artefacts?.[0]} projectTitle={project.title} compact />
         </Link>
@@ -22,6 +27,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <div className="project-card__topline">
             {isFeatured && (
               <span className="badge badge--highlight">
+                <span className="radar-pulse-dot" />
                 ⭐ Featured QA Case Study
               </span>
             )}

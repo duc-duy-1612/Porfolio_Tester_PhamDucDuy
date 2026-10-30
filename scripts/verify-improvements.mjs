@@ -134,6 +134,31 @@ import('../src/data/projects.ts').then(async (projectsModule) => {
   assert.ok(heroCode.includes('<HeroTerminal'), 'HeroSection must embed HeroTerminal widget');
   console.log('  ✔ Re-test HeroTerminal.tsx: 3D QA Automation Terminal & Hero integration verified');
 
+  // Verify 30 Test Cases Data Integrity
+  const { tncTestCases } = await import('../src/data/tncTestCases.ts');
+  assert.strictEqual(Array.isArray(tncTestCases), true, 'tncTestCases must be an array');
+  assert.strictEqual(tncTestCases.length, 30, 'tncTestCases must contain exactly 30 test cases');
+  const tncIds = new Set(tncTestCases.map(tc => tc.id));
+  assert.strictEqual(tncIds.size, 30, 'All 30 test case IDs must be unique');
+  assert.strictEqual(tncTestCases.every(tc => tc.status === 'PASSED'), true, 'All test cases must have status PASSED');
+  assert.strictEqual(tncTestCases.every(tc => tc.testSteps.length > 0), true, 'All test cases must have non-empty steps');
+  console.log('  ✔ Re-test tncTestCases.ts: All 30 authentic test cases verified with 100% data integrity');
+
+  // Verify TestCaseExplorer Component
+  const explorerCode = fs.readFileSync(new URL('../src/components/projects/TestCaseExplorer.tsx', import.meta.url), 'utf8');
+  assert.ok(explorerCode.includes('tncTestCases'), 'TestCaseExplorer must import tncTestCases');
+  assert.ok(explorerCode.includes('selectedCategory'), 'TestCaseExplorer must support category filtering');
+  assert.ok(explorerCode.includes('selectedType'), 'TestCaseExplorer must support type filtering');
+  assert.ok(detailPageCode.includes('<TestCaseExplorer'), 'ProjectDetailPage must embed TestCaseExplorer for web-functional-testing');
+  console.log('  ✔ Re-test TestCaseExplorer.tsx: Matrix filters, search and ProjectDetailPage integration verified');
+
+  // Verify Cyber Radar Scanline
+  assert.ok(cardCode.includes('cyber-radar-scan'), 'ProjectCard must include cyber-radar-scan');
+  assert.ok(cardCode.includes('radar-pulse-dot'), 'ProjectCard must include radar-pulse-dot');
+  const cssCode = fs.readFileSync(new URL('../src/styles/index.css', import.meta.url), 'utf8');
+  assert.ok(cssCode.includes('cyberRadarSweep'), 'CSS must define cyberRadarSweep keyframe animation');
+  console.log('  ✔ Re-test CyberScanline: Radar sweep animation & pulse dot verified');
+
   console.log('\n--- ALL 3-LAYER LOGICAL TESTS PASSED (100% SUCCESS) ---');
 }).catch(err => {
   console.error('Test Suite Failed:', err);

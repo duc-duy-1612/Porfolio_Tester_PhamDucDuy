@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { ArtefactGallery } from "../components/projects/ArtefactGallery";
 import { DecompositionFlow } from "../components/projects/DecompositionFlow";
 import { GapCard } from "../components/projects/GapCard";
+import { TestCaseExplorer } from "../components/projects/TestCaseExplorer";
 import { ArtefactPreview } from "../components/ui/ArtefactPreview";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { TagList } from "../components/ui/TagList";
@@ -209,6 +210,12 @@ function ProjectDetailContent({ project }: { project: NonNullable<ReturnType<typ
             ) : null}
 
 
+
+            {project.slug === "web-functional-testing" && (
+              <CaseStudyBlock title="Complete 30 Test Cases Matrix & Interactive Explorer">
+                <TestCaseExplorer />
+              </CaseStudyBlock>
+            )}
 
             {project.selectedTestCases && (
               <CaseStudyBlock title="Selected Test Cases">
