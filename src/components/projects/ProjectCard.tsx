@@ -10,13 +10,23 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const isFeatured = project.slug === "web-functional-testing";
+
   return (
     <TiltCard>
-      <article className="project-card h-full">
+      <article className={`project-card h-full ${isFeatured ? "project-card--featured" : ""}`}>
         <Link className="project-card__preview" to={`/projects/${project.slug}`} aria-label={`View ${project.title}`}>
           <ArtefactPreview artefact={project.artefacts?.[0]} projectTitle={project.title} compact />
         </Link>
         <div className="project-card__body">
+          <div className="project-card__topline">
+            {isFeatured && (
+              <span className="badge badge--highlight">
+                ⭐ Featured QA Case Study
+              </span>
+            )}
+            {project.publicLabel && <span className="badge badge--label">{project.publicLabel}</span>}
+          </div>
           <h3>
             <Link to={`/projects/${project.slug}`}>
               {project.title}
@@ -25,9 +35,20 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </h3>
           <p className="project-card__role">
             {project.role}
-            {project.publicLabel && <span className="badge" style={{ marginLeft: '8px', fontSize: '0.75rem', padding: '2px 6px', background: 'var(--surface-muted)', borderRadius: '4px' }}>{project.publicLabel}</span>}
           </p>
           <p className="project-card__problem">{project.problem}</p>
+
+          {project.summaryMetrics && project.summaryMetrics.length > 0 && (
+            <div className="project-card__metrics" aria-label="Key project metrics">
+              {project.summaryMetrics.slice(0, 3).map((metric, idx) => (
+                <div key={idx} className="metric-pill">
+                  <span className="metric-pill__value">{metric.value}</span>
+                  <span className="metric-pill__label">{metric.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
           <TagList tags={project.tags.slice(0, 4)} variant="subtle" />
           <Link className="text-link" to={`/projects/${project.slug}`}>
             View Case Study

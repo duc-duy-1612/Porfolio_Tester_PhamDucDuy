@@ -1,4 +1,5 @@
-import { ArrowRight, Github, Linkedin } from "lucide-react";
+import { ArrowRight, Check, Copy, Github, Linkedin } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { profile } from "../../data/profile";
 import { isConfigured, mailto, optionalUrl, withBasePath } from "../../utils/config";
 import { FadeIn } from "../ui/FadeIn";
@@ -6,6 +7,30 @@ import { SectionHeading } from "../ui/SectionHeading";
 import { ContactForm } from "../ui/ContactForm";
 
 export function ContactSection() {
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const copyTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) {
+        window.clearTimeout(copyTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopy = (text: string, key: string) => {
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(text);
+      setCopiedKey(key);
+      if (copyTimeoutRef.current) {
+        window.clearTimeout(copyTimeoutRef.current);
+      }
+      copyTimeoutRef.current = window.setTimeout(() => {
+        setCopiedKey(null);
+      }, 2000);
+    }
+  };
+
   const email = isConfigured(profile.contact.email) ? profile.contact.email : undefined;
   const emailHref = mailto(profile.contact.email);
   const linkedin = optionalUrl(profile.contact.linkedin);
@@ -28,7 +53,18 @@ export function ContactSection() {
               <div style={{ marginTop: '16px', color: 'var(--text-muted)' }}>
                 {email && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ fontWeight: 800 }}>Email:</span> <a href={emailHref} style={{ color: 'inherit', textDecoration: 'none' }}>{email}</a>
+                    <span style={{ fontWeight: 800 }}>Email:</span>{" "}
+                    <a href={emailHref} style={{ color: 'inherit', textDecoration: 'none' }}>{email}</a>
+                    <button 
+                      type="button"
+                      onClick={() => handleCopy(email, 'email')}
+                      aria-label="Copy email address"
+                      className="copy-btn"
+                      title={copiedKey === 'email' ? 'Copied!' : 'Copy to clipboard'}
+                    >
+                      {copiedKey === 'email' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                      {copiedKey === 'email' && <span className="copied-tooltip">Copied!</span>}
+                    </button>
                   </div>
                 )}
                 {isConfigured(profile.contact.phone) && (
@@ -37,6 +73,16 @@ export function ContactSection() {
                     <a href={`tel:${profile.contact.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                       {profile.contact.phone}
                     </a>
+                    <button 
+                      type="button"
+                      onClick={() => handleCopy(profile.contact.phone!, 'phone')}
+                      aria-label="Copy phone number"
+                      className="copy-btn"
+                      title={copiedKey === 'phone' ? 'Copied!' : 'Copy to clipboard'}
+                    >
+                      {copiedKey === 'phone' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                      {copiedKey === 'phone' && <span className="copied-tooltip">Copied!</span>}
+                    </button>
                   </div>
                 )}
                 {isConfigured(profile.location) && (

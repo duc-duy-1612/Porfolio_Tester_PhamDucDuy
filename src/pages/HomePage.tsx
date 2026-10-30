@@ -12,9 +12,9 @@ import { optionalUrl } from "../utils/config";
 
 export function HomePage() {
   useSEO({
-    title: "Phạm Đức Duy | Fresher IT Business Analyst",
+    title: "Phạm Đức Duy | Fresher Software Tester & QA",
     description:
-      "Portfolio of Phạm Đức Duy, a Fresher IT Business Analyst with healthcare product experience, technical foundations and case studies in requirement analysis, process modelling, data mapping and system design.",
+      "Portfolio of Phạm Đức Duy, a Fresher Software Tester & QA with hands-on manual and automation testing experience, requirement analysis, and case studies in healthcare products.",
     canonical: optionalUrl(profile.contact.canonicalUrl),
     ogImage: optionalUrl(profile.contact.ogImage),
     structuredData: {

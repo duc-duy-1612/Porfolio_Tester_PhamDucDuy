@@ -2092,3 +2092,175 @@ dd {
   max-width: 100%;
 }
 
+/* --- Quick Stats Bar in Hero --- */
+.hero-stats-row {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .hero-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-stat-card {
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface), transparent 30%);
+  border: 1px solid var(--border);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(37, 99, 235, 0.15);
+}
+
+.hero-stat-card__value {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #60a5fa;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.hero-stat-card__label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.hero-stat-card__sub {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+/* --- Project Card Enhancements --- */
+.project-card--featured {
+  border-color: rgba(59, 130, 246, 0.45) !important;
+  box-shadow: 0 0 24px -4px rgba(37, 99, 235, 0.2) !important;
+  position: relative;
+}
+
+.project-card__topline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.badge--highlight {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+.badge--label {
+  font-size: 0.74rem;
+  padding: 3px 8px;
+  background: var(--surface-muted);
+  border-radius: 6px;
+  color: var(--text-muted);
+}
+
+.project-card__metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 16px 0;
+}
+
+.metric-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: #93c5fd;
+}
+
+.metric-pill__value {
+  font-weight: 800;
+  color: #60a5fa;
+}
+
+.metric-pill__label {
+  opacity: 0.85;
+  font-size: 0.72rem;
+}
+
+/* --- Copy to Clipboard Button --- */
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  margin-left: 4px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+  background: var(--surface-muted);
+  color: var(--primary);
+  border-color: var(--border);
+}
+
+.copied-tooltip {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #059669;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: fadeInOut 2s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, 4px); }
+  15% { opacity: 1; transform: translate(-50%, 0); }
+  85% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -4px); }
+}
+

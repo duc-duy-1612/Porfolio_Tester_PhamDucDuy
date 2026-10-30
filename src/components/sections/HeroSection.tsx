@@ -15,92 +15,113 @@ const workspaceCards = [
   { title: "Testing & Case Studies", desc: "Explore detailed QA deliverables including functional test design, Selenium automation, and cross-system test analysis." },
 ];
 
+const heroStats = [
+  { value: "06+", label: "Months Enterprise QA & BA", sub: "TMA Solutions Experience" },
+  { value: "30+", label: "Functional & Automation Cases", sub: "Selenium IDE Suite" },
+  { value: "10+", label: "Defect Reports & Bug Tracking", sub: "Severity & Reproduction Steps" },
+  { value: "3.41", label: "GPA / 4.0 — IT Engineering", sub: "Bachelor Degree (2022 - 2026)" },
+];
+
 export function HeroSection() {
   const resumeHref = withBasePath(optionalUrl(profile.contact.resumeFile));
   const profileImage = withBasePath(optionalUrl(profile.contact.profileImage));
 
   return (
     <section className="hero-section section" id="hero" aria-labelledby="hero-title">
-      <div className="section-container hero-grid">
-        <FadeIn className="hero-copy">
-          <p className="eyebrow">{profile.heroEyebrow}</p>
-          <div className="status-badge">
-            <ShieldCheck aria-hidden="true" size={18} />
-            {profile.status}
-          </div>
-          <h1 id="hero-title">{profile.heroHeadline}</h1>
-          <p className="hero-supporting">{profile.heroSupportingHeadline}</p>
-          <p className="hero-description">{profile.heroDescription}</p>
-          <div className="hero-actions" aria-label="Primary actions">
-            <MagneticButton>
-              <Link className="button button--primary inline-flex" to="/#case-studies">
-                View Case Studies
-                <ArrowRight aria-hidden="true" size={18} />
-              </Link>
-            </MagneticButton>
-            {resumeHref && (
+      <div className="section-container">
+        <div className="hero-grid">
+          <FadeIn className="hero-copy">
+            <p className="eyebrow">{profile.heroEyebrow}</p>
+            <div className="status-badge">
+              <ShieldCheck aria-hidden="true" size={18} />
+              {profile.status}
+            </div>
+            <h1 id="hero-title">{profile.heroHeadline}</h1>
+            <p className="hero-supporting">{profile.heroSupportingHeadline}</p>
+            <p className="hero-description">{profile.heroDescription}</p>
+            <div className="hero-actions" aria-label="Primary actions">
               <MagneticButton>
-                <a 
-                  className="button button--secondary inline-flex" 
-                  href={resumeHref} 
-                  download
-                  onClick={() => {
-                    // TODO: Add real analytics tracking here (e.g. Google Analytics)
-                    console.log("Resume downloaded!");
-                  }}
-                >
-                  <Download aria-hidden="true" size={18} />
-                  Download Resume
-                </a>
-              </MagneticButton>
-            )}
-            {(optionalUrl(profile.contact.email) || optionalUrl(profile.contact.linkedin)) && (
-              <MagneticButton>
-                <Link className="button button--ghost inline-flex" to="/#contact">
-                  <Mail aria-hidden="true" size={18} />
-                  Contact Me
+                <Link className="button button--primary inline-flex" to="/#case-studies">
+                  View Case Studies
+                  <ArrowRight aria-hidden="true" size={18} />
                 </Link>
               </MagneticButton>
-            )}
-          </div>
-          <ul className="credibility-list" aria-label="Quick credibility indicators">
-            {profile.credibility.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </FadeIn>
-
-        <FadeIn className="hero-visual" delay={0.1}>
-          <div className="workspace-card workspace-card--profile">
-            <div>
-              <strong>{profile.fullName}</strong>
-              <span>{profile.positioning}</span>
+              {resumeHref && (
+                <MagneticButton>
+                  <a 
+                    className="button button--secondary inline-flex" 
+                    href={resumeHref} 
+                    download
+                    onClick={() => {
+                      // TODO: Add real analytics tracking here (e.g. Google Analytics)
+                      console.log("Resume downloaded!");
+                    }}
+                  >
+                    <Download aria-hidden="true" size={18} />
+                    Download Resume
+                  </a>
+                </MagneticButton>
+              )}
+              {(optionalUrl(profile.contact.email) || optionalUrl(profile.contact.linkedin)) && (
+                <MagneticButton>
+                  <Link className="button button--ghost inline-flex" to="/#contact">
+                    <Mail aria-hidden="true" size={18} />
+                    Contact Me
+                  </Link>
+                </MagneticButton>
+              )}
             </div>
-          </div>
+            <ul className="credibility-list" aria-label="Quick credibility indicators">
+              {profile.credibility.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </FadeIn>
 
-          <div className="workspace-stack flex sm:grid overflow-x-auto sm:overflow-visible snap-x pb-4 sm:pb-0" aria-label="QA & Tester workspace preview">
-            {workspaceCards.map((card, index) => (
-              <a
-                href="#case-studies"
-                className="workspace-card shrink-0 w-[85%] sm:w-auto snap-center hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 cursor-pointer block no-underline"
-                key={card.title}
-                style={{ "--card-index": index } as CSSProperties}
-              >
-                <span className="workspace-card__number">0{index + 1}</span>
-                <strong>{card.title}</strong>
-                <p className="text-sm mt-2 opacity-80 leading-relaxed font-normal">
-                  {card.desc}
-                </p>
-              </a>
+          <FadeIn className="hero-visual" delay={0.1}>
+            <div className="workspace-card workspace-card--profile">
+              <div>
+                <strong>{profile.fullName}</strong>
+                <span>{profile.positioning}</span>
+              </div>
+            </div>
+
+            <div className="workspace-stack flex sm:grid overflow-x-auto sm:overflow-visible snap-x pb-4 sm:pb-0" aria-label="QA & Tester workspace preview">
+              {workspaceCards.map((card, index) => (
+                <a
+                  href="#case-studies"
+                  className="workspace-card shrink-0 w-[85%] sm:w-auto snap-center hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 cursor-pointer block no-underline"
+                  key={card.title}
+                  style={{ "--card-index": index } as CSSProperties}
+                >
+                  <span className="workspace-card__number">0{index + 1}</span>
+                  <strong>{card.title}</strong>
+                  <p className="text-sm mt-2 opacity-80 leading-relaxed font-normal">
+                    {card.desc}
+                  </p>
+                </a>
+              ))}
+            </div>
+
+            <div className="flex items-center w-full max-w-2xl mt-8 text-sm font-semibold text-gray-400">
+              <span className="shrink-0 hover:text-blue-400 transition-colors">Problem</span>
+              <div className="flex-1 h-px bg-gradient-to-r from-blue-900 to-blue-500 mx-4"></div>
+              <span className="shrink-0 hover:text-blue-400 transition-colors">Analysis</span>
+              <div className="flex-1 h-px bg-gradient-to-r from-blue-500 to-blue-900 mx-4"></div>
+              <span className="shrink-0 hover:text-blue-400 transition-colors">Solution</span>
+            </div>
+          </FadeIn>
+        </div>
+
+        <FadeIn className="hero-stats-row" delay={0.15}>
+          <div className="hero-stats-grid">
+            {heroStats.map((stat) => (
+              <div className="hero-stat-card" key={stat.label}>
+                <strong className="hero-stat-card__value">{stat.value}</strong>
+                <span className="hero-stat-card__label">{stat.label}</span>
+                <small className="hero-stat-card__sub">{stat.sub}</small>
+              </div>
             ))}
-          </div>
-
-          <div className="flex items-center w-full max-w-2xl mt-8 text-sm font-semibold text-gray-400">
-            <span className="shrink-0 hover:text-blue-400 transition-colors">Problem</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-blue-900 to-blue-500 mx-4"></div>
-            <span className="shrink-0 hover:text-blue-400 transition-colors">Analysis</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-blue-500 to-blue-900 mx-4"></div>
-            <span className="shrink-0 hover:text-blue-400 transition-colors">Solution</span>
           </div>
         </FadeIn>
       </div>

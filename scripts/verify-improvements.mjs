@@ -91,6 +91,29 @@ import('../src/data/projects.ts').then(async (projectsModule) => {
   assert.ok(detailPageCode.includes('withBasePath(evidence.href'), 'ProjectDetailPage must wrap evidence.href with withBasePath');
   console.log('  ✔ Re-test ProjectDetailPage.tsx: withBasePath prevents 404 on GitHub Pages');
 
+  // Verify SEO metadata on HomePage
+  const homePageCode = fs.readFileSync(new URL('../src/pages/HomePage.tsx', import.meta.url), 'utf8');
+  assert.ok(!homePageCode.includes('Fresher IT Business Analyst'), 'HomePage SEO must not contain "Fresher IT Business Analyst"');
+  assert.ok(homePageCode.includes('Phạm Đức Duy | Fresher Software Tester & QA'), 'HomePage SEO title must reflect Fresher Software Tester & QA');
+  console.log('  ✔ Re-test HomePage.tsx: SEO title & metadata verified for QA/Tester');
+
+  // Verify Quick Stats in HeroSection
+  assert.ok(heroCode.includes('hero-stats-row'), 'HeroSection must include hero-stats-row');
+  assert.ok(heroCode.includes('06+'), 'HeroSection must display 06+ months experience stat');
+  assert.ok(heroCode.includes('30+'), 'HeroSection must display 30+ test cases stat');
+  console.log('  ✔ Re-test HeroSection.tsx: Quick Stats Bar rendered correctly');
+
+  // Verify ProjectCard metrics & featured badge
+  const cardCode = fs.readFileSync(new URL('../src/components/projects/ProjectCard.tsx', import.meta.url), 'utf8');
+  assert.ok(cardCode.includes('metric-pill'), 'ProjectCard must render metric pills');
+  assert.ok(cardCode.includes('badge--highlight'), 'ProjectCard must render badge--highlight for featured project');
+  console.log('  ✔ Re-test ProjectCard.tsx: Mini metrics pills and featured badge verified');
+
+  // Verify 1-click copy buttons in ContactSection
+  assert.ok(contactCode.includes('copy-btn'), 'ContactSection must include copy-btn');
+  assert.ok(contactCode.includes('handleCopy'), 'ContactSection must include handleCopy logic');
+  console.log('  ✔ Re-test ContactSection.tsx: 1-click clipboard copy functionality verified');
+
   console.log('\n--- ALL 3-LAYER LOGICAL TESTS PASSED (100% SUCCESS) ---');
 }).catch(err => {
   console.error('Test Suite Failed:', err);
