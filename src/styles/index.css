@@ -2264,3 +2264,139 @@ dd {
   100% { opacity: 0; transform: translate(-50%, -4px); }
 }
 
+/* --- 3D Interactive QA Automation Terminal --- */
+.hero-terminal {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 640px;
+  border-radius: 12px;
+  background: rgba(10, 16, 31, 0.92);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7), 0 0 24px -2px rgba(37, 99, 235, 0.18);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-terminal:hover {
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 20px 42px -6px rgba(0, 0, 0, 0.8), 0 0 32px 0 rgba(37, 99, 235, 0.3);
+}
+
+.hero-terminal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.hero-terminal__dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot--red { background: #ef4444; }
+.dot--yellow { background: #f59e0b; }
+.dot--green { background: #10b981; }
+
+.hero-terminal__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #94a3b8;
+}
+
+.hero-terminal__badge {
+  font-size: 0.66rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hero-terminal__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(37, 99, 235, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hero-terminal__btn:hover:not(:disabled) {
+  background: rgba(37, 99, 235, 0.35);
+  border-color: #60a5fa;
+  color: #ffffff;
+}
+
+.hero-terminal__btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.hero-terminal__body {
+  padding: 16px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.hero-terminal__command {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  word-break: break-all;
+}
+
+.hero-terminal__logs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.terminal-log-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.terminal-log-row--pass {
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.terminal-log-row--active {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.terminal-log-row--pending {
+  opacity: 0.45;
+}
+
+.hero-terminal__footer {
+  padding-top: 10px;
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+}
+

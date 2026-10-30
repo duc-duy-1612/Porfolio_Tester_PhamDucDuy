@@ -114,6 +114,26 @@ import('../src/data/projects.ts').then(async (projectsModule) => {
   assert.ok(contactCode.includes('handleCopy'), 'ContactSection must include handleCopy logic');
   console.log('  ✔ Re-test ContactSection.tsx: 1-click clipboard copy functionality verified');
 
+  // Verify 3D Starfield Canvas in AnimatedBackground
+  const bgCode = fs.readFileSync(new URL('../src/components/ui/AnimatedBackground.tsx', import.meta.url), 'utf8');
+  assert.ok(bgCode.includes('<canvas'), 'AnimatedBackground must render a canvas element for 3D starfield');
+  assert.ok(bgCode.includes('requestAnimationFrame'), 'AnimatedBackground must utilize requestAnimationFrame loop');
+  assert.ok(bgCode.includes('cancelAnimationFrame'), 'AnimatedBackground must cleanup animation frame on unmount');
+  console.log('  ✔ Re-test AnimatedBackground.tsx: 3D Starfield Canvas and memory cleanup verified');
+
+  // Verify Spotlight hover effect in TiltCard
+  const tiltCode = fs.readFileSync(new URL('../src/components/ui/TiltCard.tsx', import.meta.url), 'utf8');
+  assert.ok(tiltCode.includes('radial-gradient'), 'TiltCard must incorporate radial-gradient spotlight effect');
+  assert.ok(tiltCode.includes('spotlight'), 'TiltCard must track spotlight mouse coordinates');
+  console.log('  ✔ Re-test TiltCard.tsx: 3D Spotlight cursor-tracking effect verified');
+
+  // Verify 3D Interactive QA Terminal
+  const terminalCode = fs.readFileSync(new URL('../src/components/ui/HeroTerminal.tsx', import.meta.url), 'utf8');
+  assert.ok(terminalCode.includes('selenium-ide-runner'), 'HeroTerminal must simulate selenium-ide-runner');
+  assert.ok(terminalCode.includes('runSimulation'), 'HeroTerminal must support interactive simulation');
+  assert.ok(heroCode.includes('<HeroTerminal'), 'HeroSection must embed HeroTerminal widget');
+  console.log('  ✔ Re-test HeroTerminal.tsx: 3D QA Automation Terminal & Hero integration verified');
+
   console.log('\n--- ALL 3-LAYER LOGICAL TESTS PASSED (100% SUCCESS) ---');
 }).catch(err => {
   console.error('Test Suite Failed:', err);

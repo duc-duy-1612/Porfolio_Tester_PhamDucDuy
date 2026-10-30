@@ -6,6 +6,7 @@ import { optionalUrl, withBasePath } from "../../utils/config";
 import { FadeIn } from "../ui/FadeIn";
 import { InitialsAvatar } from "../ui/InitialsAvatar";
 import { MagneticButton } from "../ui/MagneticButton";
+import { HeroTerminal } from "../ui/HeroTerminal";
 
 const workspaceCards = [
   { title: "User Stories & Acceptance Criteria", desc: "Structured 340+ features and defined meticulous acceptance criteria for complex healthcare and e-commerce systems." },
@@ -102,6 +103,8 @@ export function HeroSection() {
                 </a>
               ))}
             </div>
+
+            <HeroTerminal />
 
             <div className="flex items-center w-full max-w-2xl mt-8 text-sm font-semibold text-gray-400">
               <span className="shrink-0 hover:text-blue-400 transition-colors">Problem</span>

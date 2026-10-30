@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 
 interface TiltCardProps {
   children: ReactNode;
@@ -8,6 +8,7 @@ interface TiltCardProps {
 
 export function TiltCard({ children, className = '' }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [spotlight, setSpotlight] = useState({ x: 0, y: 0, opacity: 0 });
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -32,11 +33,13 @@ export function TiltCard({ children, className = '' }: TiltCardProps) {
 
     x.set(xPct);
     y.set(yPct);
+    setSpotlight({ x: mouseX, y: mouseY, opacity: 1 });
   };
 
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
+    setSpotlight((prev) => ({ ...prev, opacity: 0 }));
   };
 
   return (
@@ -59,6 +62,13 @@ export function TiltCard({ children, className = '' }: TiltCardProps) {
         }}
         className="w-full h-full relative transform-gpu"
       >
+        <div
+          className="pointer-events-none absolute -inset-px rounded-[inherit] transition-opacity duration-300 z-10"
+          style={{
+            opacity: spotlight.opacity,
+            background: `radial-gradient(380px circle at ${spotlight.x}px ${spotlight.y}px, rgba(59, 130, 246, 0.16), transparent 75%)`,
+          }}
+        />
         {children}
       </div>
     </motion.div>
