@@ -20,10 +20,10 @@ export function ContactSection() {
         <FadeIn className="contact-panel grid grid-cols-1 lg:grid-cols-2 gap-12 mt-8">
           <div className="contact-panel__copy flex flex-col justify-between">
             <div>
-              <h3>Looking for a Fresher IT Business Analyst who can bridge business and technology?</h3>
+              <h3>Looking for a Fresher Software Tester / QA with strong testing acumen?</h3>
               <p>
-                I am open to opportunities where I can contribute to requirement analysis, process improvement,
-                product delivery and cross-functional collaboration.
+                I am open to opportunities where I can contribute to manual testing, test automation,
+                requirement analysis, and defect reporting in Agile/Scrum teams.
               </p>
               <div style={{ marginTop: '16px', color: 'var(--text-muted)' }}>
                 {email && (
@@ -33,7 +33,10 @@ export function ContactSection() {
                 )}
                 {isConfigured(profile.contact.phone) && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ fontWeight: 800 }}>Phone:</span> {profile.contact.phone}
+                    <span style={{ fontWeight: 800 }}>Phone:</span>{" "}
+                    <a href={`tel:${profile.contact.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                      {profile.contact.phone}
+                    </a>
                   </div>
                 )}
                 {isConfigured(profile.location) && (

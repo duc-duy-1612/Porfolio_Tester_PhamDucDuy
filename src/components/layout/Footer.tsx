@@ -10,7 +10,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="site-footer__inner">
         <p>
-          Designed and developed as a case-study-driven Business Analyst portfolio. ©{" "}
+          Designed and developed as a case-study-driven Software Tester & QA portfolio. ©{" "}
           {new Date().getFullYear()} {profile.fullName}.
         </p>
         <div className="site-footer__links">

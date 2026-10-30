@@ -26,6 +26,10 @@ export interface Profile {
   workPrinciples: string[];
   facts: Array<{ label: string; value: string }>;
   contact: ContactConfig;
+  careerObjective?: {
+    shortTerm: string;
+    longTerm: string;
+  };
 }
 
 export interface ExperienceCapability {

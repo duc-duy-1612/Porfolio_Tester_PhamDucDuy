@@ -12,7 +12,7 @@ const workspaceCards = [
   { title: "BPMN / Process Flow", desc: "Modelled cross-system swimlanes, AS-IS/TO-BE workflows, and user journeys bridging business needs and technical logic." },
   { title: "Integration Flow", desc: "Analysed API hand-offs, asynchronous data synchronisation, and third-party vendor integrations (e.g., Wearables, Payment)." },
   { title: "UAT & Validation", desc: "Designed positive, negative, and edge-case test scenarios, utilizing Selenium IDE for functional automation testing." },
-  { title: "Case Study Preview", desc: "Explore my detailed academic and anonymised internship deliverables showcasing end-to-end Business Analysis." },
+  { title: "Testing & Case Studies", desc: "Explore detailed QA deliverables including functional test design, Selenium automation, and cross-system test analysis." },
 ];
 
 export function HeroSection() {

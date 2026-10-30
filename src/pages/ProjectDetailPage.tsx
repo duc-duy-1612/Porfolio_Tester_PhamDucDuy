@@ -15,7 +15,7 @@ import { HighlightText } from "../components/ui/HighlightText";
 import { getAdjacentProjects, getProjectBySlug } from "../data/projects";
 import { profile } from "../data/profile";
 import { useSEO } from "../hooks/useSEO";
-import { optionalUrl } from "../utils/config";
+import { optionalUrl, withBasePath } from "../utils/config";
 
 export function ProjectDetailPage() {
   const { slug } = useParams();
@@ -590,15 +590,15 @@ function ProjectDetailContent({ project }: { project: NonNullable<ReturnType<typ
                         {evidence.description && <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{evidence.description}</p>}
                       </div>
                       {evidence.href && (evidence.fileType === 'png' || evidence.fileType === 'jpg' || evidence.fileType === 'image') ? (
-                        <button onClick={() => setLightboxData({ src: evidence.href as string, alt: evidence.title || evidence.label })} style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', gap: '6px', cursor: 'pointer', background: 'transparent', border: 'none', padding: 0, width: 'fit-content' }}>
+                        <button onClick={() => setLightboxData({ src: withBasePath(evidence.href as string) || evidence.href || "", alt: evidence.title || evidence.label })} style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', gap: '6px', cursor: 'pointer', background: 'transparent', border: 'none', padding: 0, width: 'fit-content' }}>
                           {evidence.action || "View Image"} <ArrowRight size={16} />
                         </button>
                       ) : evidence.href && evidence.download ? (
-                        <a href={evidence.href} download style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', gap: '6px', textDecoration: 'none', cursor: 'pointer', width: 'fit-content' }}>
+                        <a href={withBasePath(evidence.href)} download style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', gap: '6px', textDecoration: 'none', cursor: 'pointer', width: 'fit-content' }}>
                           {evidence.action} <ArrowRight size={16} />
                         </a>
                       ) : evidence.href && evidence.external ? (
-                        <a href={evidence.href} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', gap: '6px', textDecoration: 'none', cursor: 'pointer', width: 'fit-content' }}>
+                        <a href={withBasePath(evidence.href)} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', gap: '6px', textDecoration: 'none', cursor: 'pointer', width: 'fit-content' }}>
                           {evidence.action} <ArrowRight size={16} />
                         </a>
                       ) : (
